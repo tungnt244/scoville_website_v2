@@ -1,6 +1,1 @@
-*
-
-!.gitignore
-!/api
-!/frontend_backend
-!*/
+*.DS_Store
