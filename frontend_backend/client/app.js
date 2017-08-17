@@ -3,4 +3,4 @@ import {render} from 'react-dom'
 import AppRouter from './router.js'
 import routes from './routes.js'
 
-render(<AppRouter/>, document.querySelector('#app'))
+render(<AppRouter/>, document.getElementById('root'))

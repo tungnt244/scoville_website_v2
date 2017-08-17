@@ -58,6 +58,7 @@ router.post('/admin/login', (req, res) => {
 })
 
 router.get('*', (req, res) => {
+  console.log('heelo worl')
   const branch = matchRoutes(routes, req.url);
     let context = {}
     const content = renderToString(
