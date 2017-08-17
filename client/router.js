@@ -1,18 +1,26 @@
 import React from 'react'
-import {Router, browserHistory, Route} from 'react-router'
 
-import AppRoot from './app-root.js'
-import Home from './home.js'
-import List from './list.js'
+import BrowserRouter from 'react-router-dom/BrowserRouter'
+import {renderRoutes} from 'react-router-config'
+
+import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
+
+import routes from './routes'
+import reducers from './modules';
+
+const store = createStore(
+    reducers, window.__INITIAL_STATE__, applyMiddleware(thunk)
+)
 
 const AppRouter = () => {
     return(
-        <Router history={browserHistory}>
-            <Route path='/' component={AppRoot}>
-                <Route path='/list' component={List}/>
-                <Route path='/home' component={Home}/>
-            </Route>
-        </Router>
+        <Provider store={store}>
+            <BrowserRouter>
+                {renderRoutes(routes)}
+            </BrowserRouter>
+        </Provider>
     )
 }
 
