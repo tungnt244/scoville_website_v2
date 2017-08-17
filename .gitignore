@@ -1,0 +1,6 @@
+*
+
+!.gitignore
+!/api
+!/frontend_backend
+!*/
