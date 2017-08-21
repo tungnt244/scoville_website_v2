@@ -13,6 +13,8 @@ export default class CMSManager extends Component {
             articles : [],
             shouldRedirect: false,
         }
+        let token = localStorage.getItem('token')
+        axios.defaults.headers.common['Authorization'] = token
     }
 
     editButton = (cell, row) => {
@@ -49,6 +51,7 @@ export default class CMSManager extends Component {
     }
 
     componentDidMount(){
+        
         axios.get(url +'/cms/news/brief').then(response => {
             this.setState({
                 articles: response.data
@@ -76,14 +79,6 @@ export default class CMSManager extends Component {
                             newurl: '/admin/cms/editor'
                         })
                         }}>Create</Button>
-                    </Row>
-                    <Row className="show-grid">
-                        <Button bsStyle="primary" onClick={()=>{
-                        this.setState({
-                            shouldRedirect: true,
-                            newurl: '/admin/users'
-                        })
-                        }}>User Manager</Button>
                     </Row>
                 </Grid>
                 

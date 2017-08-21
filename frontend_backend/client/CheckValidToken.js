@@ -5,7 +5,7 @@ export default function checkValidToken(callback){
     let token = localStorage.getItem('token')
     if(token){
         var instance = axios.create({
-            baseURL: url + '/cms/checktoken',
+            baseURL: url + '/admin/checktoken',
             timeout: 10000,
             headers: {
                 'Content-Type': 'application/json', 

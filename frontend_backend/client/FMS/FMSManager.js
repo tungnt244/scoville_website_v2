@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import axios from 'axios'
-import {api_url} from '../../config'
-import {browserHistory} from 'react-router'
+import {url} from '../../config'
+import {Redirect} from 'react-router-dom'
 import {Grid, Row, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
 
 export default class FMSManager extends Component {
@@ -10,15 +10,21 @@ export default class FMSManager extends Component {
     constructor(props){
         super(props)
         this.state = {
-            forms : []
+            forms : [],
+            shouldRedirect: false
         }
+        let token = localStorage.getItem('token')
+        axios.defaults.headers.common['Authorization'] = token
     }
 
     viewButton = (cell, row) => {
         return (
         <Button bsStyle="primary"
             onClick={ () => {
-                browserHistory.push('/admin/forms/' + row.id)
+                this.setState({
+                    shouldRedirect: true,
+                    newUrl: '/admin/forms/' + row.id
+                })
             } }
         >View</Button>
         );
@@ -28,25 +34,24 @@ export default class FMSManager extends Component {
         return(
             <Button bsStyle="danger"
                 onClick={()=>{
-                    axios.delete(api_url +'/users/'+row.ID).then(response => {
-                        axios.get(url +'/users').then(response => {
+                   axios.delete(url+'/forms/recruitment/' + row.id).then(response => {
+                       axios.get(url+'/forms/recruitment').then(response => {
                             this.setState({
-                                users: response.data
+                                forms: response.data
                             })
                         }).catch(error => {
                             console.log('error: ', error)
-                        })  
-                    }).catch(error => {
-                        console.log('error: ', error)
-                    })
+                        })
+                   }).catch(err => {
+                       console.log("err: ", err)
+                   })
                 }}
             >Delete</Button>
         )
     }
 
     componentDidMount(){
-        axios.get(api_url +'/forms/recruitment').then(response => {
-            console.log('data', response.data)
+        axios.get(url+'/forms/recruitment').then(response => {
             this.setState({
                 forms: response.data
             })
@@ -56,6 +61,11 @@ export default class FMSManager extends Component {
     }
 
     render(){
+        if(this.state.shouldRedirect){
+            return(
+                <Redirect to={this.state.newUrl}/>
+            )
+        }
         let forms = this.state.forms
         return(
             <div>
@@ -63,16 +73,6 @@ export default class FMSManager extends Component {
                     <Row className="show-grid">
                         <h1>Manage Forms</h1>
                     </Row>
-                    {/* <Row className="show-grid">
-                        <Button bsStyle="success" onClick={()=>{
-                        browserHistory.push('/admin/users/create')
-                        }}>Create</Button>
-                    </Row>
-                    <Row className="show-grid">
-                        <Button bsStyle="primary" onClick={()=>{
-                        browserHistory.push('/admin/cms')
-                        }}>CMS Manager</Button>
-                    </Row> */}
                 </Grid>
                 
                 <BootstrapTable data={forms} >
@@ -80,10 +80,9 @@ export default class FMSManager extends Component {
                     <TableHeaderColumn dataField="email" >Email</TableHeaderColumn>
                     <TableHeaderColumn dataField="position">Position</TableHeaderColumn>
                     <TableHeaderColumn dataField="status">Status</TableHeaderColumn>
-                    <TableHeaderColumn dataField="CreatedAt">Created at</TableHeaderColumn>
+                    <TableHeaderColumn dataField="created_at">Created at</TableHeaderColumn>
                     <TableHeaderColumn dataFormat={this.viewButton}>View</TableHeaderColumn>
-                    {/* <TableHeaderColumn dataFormat={this.editButton}>Edit</TableHeaderColumn> */}
-                    {/* <TableHeaderColumn dataFormat={(cell,row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn> */}
+                    <TableHeaderColumn dataFormat={(cell, row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         )
