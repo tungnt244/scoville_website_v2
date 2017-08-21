@@ -4,9 +4,9 @@ import (
 	"github.com/bluele/slack"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
-	"github.com/tungnt244/scoville_website/api/main/db"
-	"github.com/tungnt244/scoville_website/api/main/helper"
-	"github.com/tungnt244/scoville_website/api/main/model"
+	"github.com/tungnt244/scoville_website_v2/api/main/db"
+	"github.com/tungnt244/scoville_website_v2/api/main/helper"
+	"github.com/tungnt244/scoville_website_v2/api/main/model"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/gomail.v2"
 	"log"
@@ -58,12 +58,18 @@ func CreateUser(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, "Missing data")
 
 	}
+
+	checkUser, _ := db.Manager.GetUserByEmail(u.Email)
+
+	if checkUser.Email != "" {
+		return c.JSON(http.StatusBadRequest, "Email already existed")
+	}
+
 	//Encrypted password before saving in database
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-
 	if helper.ValidateEmail(u.Email) == false {
 		return c.JSON(http.StatusBadRequest, "Not a valid Email")
 	}
@@ -73,11 +79,11 @@ func CreateUser(c echo.Context) error {
 	// if existedEmail.Email == u.Email {
 	// 	return c.JSON(http.StatusOK, "Email already existed")
 	// }
-	err = db.Manager.SaveUser(u.Email, string(hashedPassword))
+	tempUserId, err := db.Manager.SaveUser(u.Email, string(hashedPassword))
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusOK, "Successful Created")
+	return c.JSON(http.StatusOK, tempUserId)
 
 }
 

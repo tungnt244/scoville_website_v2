@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/tungnt244/scoville_website/api/main/model"
+	"github.com/tungnt244/scoville_website_v2/api/main/model"
 )
 
 /*
@@ -45,8 +45,10 @@ func (m *DBManager) GetUserByEmail(e string) (user model.User, err error) {
 // 	return m.database.Where(&model.User{Email: e})
 // }
 
-func (m *DBManager) SaveUser(e string, p string) (err error) {
-	err = m.database.Create(&model.User{Email: e, Password: p}).Error
+func (m *DBManager) SaveUser(e string, p string) (userId int, err error) {
+	user := model.User{Email: e, Password: p}
+	err = m.database.Create(&user).Error
+	userId = int(user.ID)
 	return
 
 }

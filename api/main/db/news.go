@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/tungnt244/scoville_website/api/main/model"
+	"github.com/tungnt244/scoville_website_v2/api/main/model"
 )
 
 func (m *DBManager) SaveNews(n *model.News) (err error) {
@@ -20,7 +20,7 @@ func (m *DBManager) GetAllNews() (n []model.News, err error) {
 }
 
 func (m *DBManager) GetAllBriefInfo() (n []model.News, err error) {
-	err = m.database.Select([]string{"id", "title", "picture", "description"}).Find(&n).Error
+	err = m.database.Select([]string{"id", "title", "picture", "description", "created_at"}).Find(&n).Error
 	return
 }
 

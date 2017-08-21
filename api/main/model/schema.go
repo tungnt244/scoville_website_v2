@@ -15,11 +15,12 @@ type User struct {
 
 type News struct {
 	// gorm.Model
-	ID          uint   `gorm:"primary_key" json:"id"`
-	Title       string `gorm:"size:255" json:"title" validate:"required"`
-	Content     string `json:"content"`
-	Picture     string `json:"picture"`
-	Description string `grom:"size:255" json:"description"`
+	ID          uint      `gorm:"primary_key" json:"id"`
+	Title       string    `gorm:"size:255" json:"title" validate:"required"`
+	Content     string    `json:"content"`
+	Picture     string    `json:"picture"`
+	Description string    `grom:"size:255" json:"description"`
+	CreatedAt   time.Time `gorm:"column:created_at;type:datetime;default:CURRENT_TIMESTAMP" json:"created_at"`
 }
 
 type Form_recruitment struct {
@@ -29,7 +30,7 @@ type Form_recruitment struct {
 	LinkGithub string    `json:"link_github"`
 	Position   string    `gorm:"default:'General Staff'" json:"position"`
 	Status     string    `gorm:"string:20;default:'Not Processed'" json:"status"`
-	CreatedAt  time.Time `gorm:"column:created_at;type:datetime;default:CURRENT_TIMESTAMP"`
+	CreatedAt  time.Time `gorm:"column:created_at;type:datetime;default:CURRENT_TIMESTAMP" json:"created_at"`
 }
 type Form_contact struct {
 	ID                   uint      `gorm:"primary_key" json:"id"`
@@ -39,5 +40,5 @@ type Form_contact struct {
 	PhoneNumber          string    `json:"phone_number"`
 	DescriptionOfContact string    `json:"description_of_contact"`
 	Status               string    `gorm:"string:20;default:'Not Processed'" json:"status"`
-	CreatedAt            time.Time `gorm:"column:created_at;type:datetime;default:CURRENT_TIMESTAMP"`
+	CreatedAt            time.Time `gorm:"column:created_at;type:datetime;default:CURRENT_TIMESTAMP" json:"created_at"`
 }
