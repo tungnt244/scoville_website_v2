@@ -7,10 +7,12 @@ import UMSLayout from './UMS/UMSLayout'
 import FMSLayout from './FMS/FMSLayout'
 import checkValidToken from './CheckValidToken'
 import {connect} from 'react-redux'
+import {actionSetLogin} from './modules/isLogin'
 
 class AdminLayout extends React.Component{
     constructor(props){
         super(props)
+        console.log('is logged', this.props)
         this.state = {
             isLogged: this.props.isLogged
         }
@@ -22,6 +24,14 @@ class AdminLayout extends React.Component{
                 isLogged: nextProps.isLogged
             })
         }
+    }
+
+    componentDidMount(){
+        if(localStorage.getItem("token")) {
+            checkValidToken(()=>{
+                this.props.setLogin(true)
+            })
+        } else{localStorage.clear()}
     }
 
     render(){
@@ -54,4 +64,12 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(AdminLayout)
+const mapDispatchToProps = dispatch => {
+    return{
+        setLogin: (isLogged) => {
+            dispatch(actionSetLogin(isLogged))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminLayout)

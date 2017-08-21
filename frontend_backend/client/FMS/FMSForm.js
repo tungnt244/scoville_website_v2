@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {api_url} from '../../config'
+import {url} from '../../config'
 import axios from 'axios'
 import {Grid, Row, DropdownButton, MenuItem, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
-import {browserHistory} from 'react-router'
+import {Redirect} from 'react-router-dom'
 
 const FORM_STATUS = {
     0 : 'not processed',
@@ -13,31 +14,35 @@ const FORM_STATUS = {
 export default class FMSForm extends Component{
     constructor(props){
         super(props)
+        this.state = {
+            shouldRedirect: false
+        }
+        let token = localStorage.getItem("token")
+        axios.defaults.headers.common['Authorization'] = token
     }
 
     componentDidMount(){
-        if(this.props.params.id){
-        axios.get(api_url +'/forms/recruitment/'+this.props.params.id).then(response => {
-            console.log('response data', response.data)
-            let {id, email, self_pr, link_github, position, status, CreateAt} = response.data
-            let status_key
-            if(status == 'not processed')
-                status_key = 0
-            else if(status == 'processing')
-                status_key = 1
-            else status_key = 2
-            this.setState({
-                id: id,
-                email: email,
-                self_pr: self_pr,
-                link_github: link_github,
-                position: position,
-                status_key: status_key,
-                CreateAt: CreateAt,
+        if(this.props.match.params.id){
+            axios.get(url +'/forms/recruitment/'+this.props.match.params.id).then(response => {
+                let {id, email, self_pr, link_github, position, status, CreateAt} = response.data
+                let status_key
+                if(status == 'not processed')
+                    status_key = 0
+                else if(status == 'processing')
+                    status_key = 1
+                else status_key = 2
+                this.setState({
+                    id: id,
+                    email: email,
+                    self_pr: self_pr,
+                    link_github: link_github,
+                    position: position,
+                    status_key: status_key,
+                    CreateAt: CreateAt,
+                })
+            }).catch(error => {
+                console.log('error: ', error)
             })
-        }).catch(error => {
-            console.log('error: ', error)
-        })
         }
     }
     
@@ -48,7 +53,7 @@ export default class FMSForm extends Component{
     }
 
     saveForm (e){
-        axios.put(api_url + '/forms/recruitment/' + this.state.id, {
+        axios.put(url + '/forms/recruitment/' + this.state.id, {
             status: FORM_STATUS[this.state.status_key]
         }).then(response => {
             alert('Successful updated')
@@ -60,6 +65,11 @@ export default class FMSForm extends Component{
 
     render(){
         let form = this.state
+        if(this.state.shouldRedirect){
+            return(
+                <Redirect to={this.state.newUrl}/>
+            )
+        }
         if(form){
             return(
                 <div>
@@ -121,7 +131,10 @@ export default class FMSForm extends Component{
                             <Button bsStyle="success" onClick={(e) => this.saveForm(e)}>Save</Button>
                             </Col>
                             <Col componentClass={ControlLabel} sm={2}>
-                            <Button bsStyle="danger" onClick={()=>{browserHistory.push('/admin/forms')}}>Back to FMS</Button>
+                            <Button bsStyle="danger" onClick={() =>this.setState({
+                                shouldRedirect: true,
+                                newUrl: '/admin/forms'
+                                })}>Back to FMS</Button>
                             </Col>
                         </FormGroup>
                     </Form>

@@ -13,6 +13,8 @@ export default class CMSManager extends Component {
             articles : [],
             shouldRedirect: false,
         }
+        let token = localStorage.getItem('token')
+        axios.defaults.headers.common['Authorization'] = token
     }
 
     editButton = (cell, row) => {
@@ -49,13 +51,8 @@ export default class CMSManager extends Component {
     }
 
     componentDidMount(){
-        let token = localStorage.getItem('token')
-        axios.get(url +'/cms/news/brief', {
-            headers: {
-                'Content-Type': 'application/json', 
-                'Authorization': token
-            }
-        }).then(response => {
+        
+        axios.get(url +'/cms/news/brief').then(response => {
             this.setState({
                 articles: response.data
             })

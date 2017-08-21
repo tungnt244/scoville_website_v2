@@ -32,14 +32,6 @@ class AdminLogin extends Component {
         })
     }
 
-    componentDidMount(){
-        if(localStorage.getItem("token")) {
-            checkValidToken(()=>{
-                this.props.setLogin(true)
-            })
-        } else{localStorage.clear()}
-    }
-
     handleLogin = (e) => {
         e.preventDefault()
         if(this.state.email === '' || this.state.password === ''){

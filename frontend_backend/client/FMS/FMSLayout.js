@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
-import axios from 'axios'
-import {url} from '../../config'
-import checkValidToken from '../CheckValidToken'
-import {renderRoutes} from 'react-router-config'
 import {Switch, Route} from 'react-router'
 import FMSManager from './FMSManager'
 import FMSForm from './FMSForm'
+
 export default class CMSLayout extends Component {
 
     render(){
@@ -16,4 +13,5 @@ export default class CMSLayout extends Component {
             </Switch>
         )
     }
+
 }

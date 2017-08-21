@@ -18,6 +18,11 @@ import getArticlesBrief from './api/getArticlesBrief';
 import deleteArticleById from './api/deleteArticleById';
 import login from './api/login';
 import checkToken from './api/CheckToken';
+
+import {getForms, getSingleForm, putSingleForm, deleteSingleForm} from './api/Form';
+
+const app = express()
+
 const router = express.Router()
 
 const store = createStore(reducers, applyMiddleware(thunk));
@@ -30,17 +35,52 @@ router.use('/cms*', function(req, res, next){
   })
 })
 
+router.use('/forms*', function(req, res, next){
+  checkToken(req.get("Authorization"), (isValid)=> {
+    if(isValid) next()
+    else return
+  })
+})
+
+router.get('/forms/recruitment', (req, res) => {
+  getForms(form => {
+    if(form) res.send(form)
+    else return res.status(404).send(form)
+  })
+})
+
+router.get('/forms/recruitment/:id', (req, res) => {
+  getSingleForm(req.params.id, (form) => {
+    if(form) res.send(form)
+    else return res.status(404).send("failed to get form")
+  })
+})
+
+router.put('/forms/recruitment/:id', (req, res) => {
+  putSingleForm(req.params.id, req.body.status, (isOk) => {
+    if(isOk) res.send("Successful updated")
+    else return res.status(404).send("failed to get form")
+  })
+})
+
+router.delete('/forms/recruitment/:id', (req, res) => {
+  deleteSingleForm(req.params.id, (message)=>{
+    if(message) res.send("Successful deleted")
+    else return res.status(404).send("failed to delete form")
+  })
+})
+
 router.get('/cms/news/brief', (req, res) => {
   getArticlesBrief((articles) => {
     if(articles) res.send(articles)
-    else return res.status(404).send("Not good")
+    else return res.status(404).send("failed to get articles")
   })
 })
 
 router.delete('/cms/news/:id', (req, res) => {
   deleteArticleById(req.params.id, (message)=> {
     if(message) res.send(message)
-    else return res.status(404).send("delete article failed")
+    else return res.status(404).send("failed to delete article")
   })
 })
 
@@ -83,5 +123,6 @@ router.get('*', (req, res) => {
     return res.redirect(302, context.url)
   }
   res.render('index', {title: 'Express', data: store.getState(), content});
-  })
-module.exports = router;
+})
+
+module.exports = router  

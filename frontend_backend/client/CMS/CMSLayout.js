@@ -1,8 +1,4 @@
 import React, {Component} from 'react'
-import axios from 'axios'
-import {url} from '../../config'
-import checkValidToken from '../CheckValidToken'
-import {renderRoutes} from 'react-router-config'
 import {Switch, Route} from 'react-router'
 import CMSManager from './CMSManager'
 import CMSEditor from './CMSEditor'
