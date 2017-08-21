@@ -4,16 +4,15 @@ import {url} from '../../config'
 import checkValidToken from '../CheckValidToken'
 import {renderRoutes} from 'react-router-config'
 import {Switch, Route} from 'react-router'
-import CMSManager from './CMSManager'
-import CMSEditor from './CMSEditor'
+import FMSManager from './FMSManager'
+import FMSForm from './FMSForm'
 export default class CMSLayout extends Component {
 
     render(){
         return(
             <Switch>
-                <Route path="/admin/cms" exact={true} component={CMSManager}/>
-                <Route path="/admin/cms/editor" exact={true} component={CMSEditor}/>
-                <Route path="/admin/cms/editor/:id" component={CMSEditor}/>
+                <Route path="/admin/forms" exact={true} component={FMSManager}/>
+                <Route path="/admin/forms/:id" component={FMSForm}/>
             </Switch>
         )
     }

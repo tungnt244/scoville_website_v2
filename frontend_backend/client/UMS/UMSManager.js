@@ -76,20 +76,16 @@ export default class CMSManager extends Component {
                             this.setState({shouldRedirect: true, newurl: '/admin/users/create'})
                         }}>Create</Button>
                     </Row>
-                    <Row className="show-grid">
-                        <Button bsStyle="primary" onClick={()=>{
-                            this.setState({shouldRedirect: true, newurl: '/admin/cms'})
-                        }}>CMS Manager</Button>
+                    <Row>
+                        <BootstrapTable data={users} >
+                            <TableHeaderColumn dataField="ID" isKey={true} >User ID</TableHeaderColumn> 
+                            <TableHeaderColumn dataField="email" >Email</TableHeaderColumn>
+                            <TableHeaderColumn dataField="CreatedAt">Created at</TableHeaderColumn>
+                            <TableHeaderColumn dataFormat={this.editButton}>Edit</TableHeaderColumn>
+                            <TableHeaderColumn dataFormat={(cell,row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn>
+                        </BootstrapTable>
                     </Row>
                 </Grid>
-                
-                <BootstrapTable data={users} >
-                    <TableHeaderColumn dataField="ID" isKey={true} >User ID</TableHeaderColumn> 
-                    <TableHeaderColumn dataField="email" >Email</TableHeaderColumn>
-                    <TableHeaderColumn dataField="CreatedAt">Created at</TableHeaderColumn>
-                    <TableHeaderColumn dataFormat={this.editButton}>Edit</TableHeaderColumn>
-                    <TableHeaderColumn dataFormat={(cell,row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn>
-                </BootstrapTable>
             </div>
         )
     }

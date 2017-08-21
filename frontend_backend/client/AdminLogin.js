@@ -4,13 +4,15 @@ import axios from 'axios'
 import {url} from '../config'
 import {Redirect} from 'react-router-dom'
 import checkValidToken from './CheckValidToken'
+import {connect} from 'react-redux'
+import {actionSetLogin} from './modules/isLogin'
 
-export default class AdminLogin extends Component {
+class AdminLogin extends Component {
 
     constructor(props){
         super(props)
         this.state={
-            isLogged: false,
+            isLogged: this.props.isLogged,
             email: '',
             password: '',
             errorMessage: '',
@@ -33,9 +35,7 @@ export default class AdminLogin extends Component {
     componentDidMount(){
         if(localStorage.getItem("token")) {
             checkValidToken(()=>{
-                this.setState({
-                    isLogged: true
-                })
+                this.props.setLogin(true)
             })
         } else{localStorage.clear()}
     }
@@ -54,12 +54,7 @@ export default class AdminLogin extends Component {
         }
         axios.post(url+'/admin/login', user).then( response => {
             localStorage.setItem('token', response.data.token)
-            this.setState({
-                isLogged: true,
-            })
-            this.setState({
-                shouldRedirect: true
-            })
+            this.props.setLogin(true)
         }).catch(error => {
             let errorMessage = ''
             if(typeof error.response != 'undefined'){
@@ -74,9 +69,15 @@ export default class AdminLogin extends Component {
 
     handleLogout() {
         localStorage.clear()
-        this.setState({
-            isLogged: false
-        })
+        this.props.setLogin(false)
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.isLogged != this.state.isLogged){
+            this.setState({
+                isLogged: nextProps.isLogged
+            })
+        }
     }
 
     render(){
@@ -133,6 +134,21 @@ export default class AdminLogin extends Component {
                 </Form>
             )
         }
-        
     }
 }
+
+const mapStateToProps = state => {
+    return{
+        isLogged: state.isLogged
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        setLogin: (isLogged) => {
+            dispatch(actionSetLogin(isLogged))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminLogin)

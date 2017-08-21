@@ -22,10 +22,11 @@ const router = express.Router()
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
-router.get('/cms/checktoken', (req, res) => {
-  checkToken(req.get("Authorization"), (isValid) => {
-    if(isValid) res.send({isValid: isValid})
-    else return res.send("Token is not valid")  
+router.use('/cms*', function(req, res, next){
+  console.log('check token middleware')
+  checkToken(req.get("Authorization"), (isValid)=> {
+    if(isValid) next()
+    else return
   })
 })
 
@@ -40,6 +41,13 @@ router.delete('/cms/news/:id', (req, res) => {
   deleteArticleById(req.params.id, (message)=> {
     if(message) res.send(message)
     else return res.status(404).send("delete article failed")
+  })
+})
+
+router.get('/admin/checktoken', (req, res) => {
+  checkToken(req.get("Authorization"), (isValid) => {
+    if(isValid) res.send({isValid: isValid})
+    else return res.send("Token is not valid")  
   })
 })
 
@@ -58,7 +66,6 @@ router.post('/admin/login', (req, res) => {
 })
 
 router.get('*', (req, res) => {
-  console.log('heelo worl')
   const branch = matchRoutes(routes, req.url);
     let context = {}
     const content = renderToString(
