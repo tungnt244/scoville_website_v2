@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/tungnt244/scoville_website/api/main/model"
+	"github.com/tungnt244/scoville_website_v2/api/main/model"
 )
 
 func (m *DBManager) GetFormContactById(id string) (form model.Form_contact, err error) {

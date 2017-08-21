@@ -8,9 +8,9 @@ import (
 	"github.com/labstack/echo/middleware"
 
 	// "fmt"
-	"github.com/tungnt244/scoville_website/api/main/config"
-	"github.com/tungnt244/scoville_website/api/main/db"
-	"github.com/tungnt244/scoville_website/api/main/handler"
+	"github.com/tungnt244/scoville_website_v2/api/main/config"
+	"github.com/tungnt244/scoville_website_v2/api/main/db"
+	"github.com/tungnt244/scoville_website_v2/api/main/handler"
 	"gopkg.in/go-playground/validator.v9"
 )
 
