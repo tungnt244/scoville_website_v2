@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"github.com/bluele/slack"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/joho/godotenv"
@@ -119,7 +118,7 @@ func Login(c echo.Context) error {
 		log.Fatal("Error loading .env file")
 	}
 	tokenSecretString := os.Getenv("SECRET_TOKEN_STRING")
-	tokenExpireTime := os.Getenv("TOKEN_EXPIRE_TIME")
+	// tokenExpireTime := os.Getenv("TOKEN_EXPIRE_TIME")
 
 	u := new(model.User)
 
@@ -145,21 +144,23 @@ func Login(c echo.Context) error {
 		return c.String(http.StatusBadRequest, "Email or Password is not correct")
 	}
 
-	// create a rsa 256 signer
-	signer := jwt.New(jwt.SigningMethodHS256)
+	token := jwt.New(jwt.SigningMethodHS256)
 
-	claims := make(jwt.MapClaims)
-	// set claims
-	claims["exp"] = time.Now().Add(time.Hour * int(tokenExpireTime)).Unix()
+	// Set claims
+	claims := token.Claims.(jwt.MapClaims)
+	claims["email"] = u.Email
+	claims["exp"] = time.Now().Add(time.Hour * 12).Unix()
+
 	// token.Claims = claims
 	// Sign the token with our secret
-	tokenString, err := signer.SignedString([]byte(tokenSecretString))
-	fmt.Println(tokenString)
+	tokenString, err := token.SignedString([]byte(tokenSecretString))
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, tokenString)
+	return c.JSON(http.StatusOK, map[string]string{
+		"token": tokenString,
+	})
 }
 
 func DeleteUser(c echo.Context) error {

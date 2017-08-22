@@ -1,20 +1,40 @@
 package main
 
 import (
-	_ "github.com/dgrijalva/jwt-go"
+	// "github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-
-	// "fmt"
 	"github.com/tungnt244/scoville_website_v2/api/main/config"
 	"github.com/tungnt244/scoville_website_v2/api/main/db"
 	"github.com/tungnt244/scoville_website_v2/api/main/handler"
 	"gopkg.in/go-playground/validator.v9"
+	"log"
+	"net/http"
+	"os"
 )
 
+func accessible(c echo.Context) error {
+	return c.String(http.StatusOK, "Accessible")
+}
+
+// func restricted(c echo.Context) error {
+// 	// user := c.Get("user").(*jwt.Token)
+// 	// claims := user.Claims.(jwt.MapClaims)
+// 	// email := claims["email"].(string)
+// 	return c.String(http.StatusOK, "Welcome "+"!")
+// }
+
 func main() {
+	//Load environtment
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	tokenSecretString := os.Getenv("SECRET_TOKEN_STRING")
+
 	//Create echo instance
 	e := echo.New()
 	e.Validator = &db.CustomValidator{ValidatorCustom: validator.New()}
@@ -38,12 +58,16 @@ func main() {
 
 	db.SetupConnection(gormDB)
 
+	//jwt
 	//RESTFUL api for user
-	e.GET("/users/:id", handler.GetUser)
-	e.GET("/users", handler.GetAllUsers)
-	e.POST("/users", handler.CreateUser)
-	e.PUT("/users/:id", handler.UpdateUser)
-	e.DELETE("/users/:id", handler.DeleteUser)
+	// e.GET("/users", handler.GetAllUsers, middleware.JWT([]byte(tokenSecretString)))
+	users := e.Group("/users")
+	users.Use(middleware.JWT([]byte(tokenSecretString)))
+	users.GET("", handler.GetAllUsers)
+	users.GET("/:id", handler.GetUser)
+	users.POST("", handler.CreateUser)
+	users.PUT("/:id", handler.UpdateUser)
+	users.DELETE("/:id", handler.DeleteUser)
 
 	//Check valid or invalid user
 	e.POST("/login", handler.Login)
@@ -52,26 +76,37 @@ func main() {
 	e.GET("/news", handler.GetAllNews)
 	e.GET("/news/brief", handler.GetAllNews)
 	e.GET("/news/:id", handler.GetNews)
-	e.POST("/news", handler.CreateNews)
-	e.PUT("/news/:id", handler.UpdateNews)
-	e.DELETE("/news/:id", handler.DeleteNews)
+	//Apply JWT middleware
+	news := e.Group("/news")
+	news.Use(middleware.JWT([]byte(tokenSecretString)))
+	news.POST("", handler.CreateNews)
+	news.PUT("/:id", handler.UpdateNews)
+	news.DELETE("/:id", handler.DeleteNews)
 
 	//RESTFUL api for formRecruitment
-	e.GET("/forms/recruitment/:id", handler.GetFormRecruitment)
-	e.GET("/forms/recruitment", handler.GetAllFormRecruitment)
-	e.GET("/forms/recruitment/general", handler.GetGeneralForm)
-	e.GET("/forms/recruitment/engineer", handler.GetEngineerForm)
-	e.PUT("/forms/recruitment/:id", handler.UpdateFormRecruitment)
+	//Apply JWT middleware
+	formRecruitment := e.Group("/forms/recruitment")
+	formRecruitment.Use(middleware.JWT([]byte(tokenSecretString)))
+	formRecruitment.GET("/:id", handler.GetFormRecruitment)
+	formRecruitment.GET("", handler.GetAllFormRecruitment)
+	formRecruitment.GET("/general", handler.GetGeneralForm)
+	formRecruitment.GET("/engineer", handler.GetEngineerForm)
+	formRecruitment.PUT("/:id", handler.UpdateFormRecruitment)
+	formRecruitment.DELETE("/:id", handler.DeleteFormRecruitment)
+
+	// limit request
 	e.POST("/forms/recruitment", handler.CreateFormRecruitment)
-	e.DELETE("/forms/recruitment/:id", handler.DeleteFormRecruitment)
 
 	//RESTFUL api for formContact
-	e.GET("/forms/contact/:id", handler.GetFormContact)
-	e.GET("/forms/contact", handler.GetAllFormContact)
-	e.PUT("/forms/contact/:id", handler.UpdateFormContact)
-	e.POST("/forms/contact", handler.CreateFormContact)
-	e.DELETE("/forms/contact/:id", handler.DeleteFormContact)
+	//Apply JWT middleware
+	formContact := e.Group("/forms/contact")
+	formContact.Use(middleware.JWT([]byte(tokenSecretString)))
+	formContact.GET("/:id", handler.GetFormContact)
+	formContact.GET("", handler.GetAllFormContact)
+	formContact.PUT("/:id", handler.UpdateFormContact)
+	formContact.DELETE("/:id", handler.DeleteFormContact)
 
+	e.POST("/forms/contact", handler.CreateFormContact)
 	// //Connect to localhost with port:4444
 	e.Logger.Fatal(e.Start(":4444"))
 }
