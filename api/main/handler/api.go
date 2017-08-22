@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"github.com/bluele/slack"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/joho/godotenv"

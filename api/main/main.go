@@ -107,6 +107,10 @@ func main() {
 	formContact.DELETE("/:id", handler.DeleteFormContact)
 
 	e.POST("/forms/contact", handler.CreateFormContact)
+
+	e.POST("/checkToken", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, true)
+	}, middleware.JWT([]byte(tokenSecretString)))
 	// //Connect to localhost with port:4444
 	e.Logger.Fatal(e.Start(":4444"))
 }
