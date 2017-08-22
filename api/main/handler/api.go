@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/bluele/slack"
+	"github.com/dgrijalva/jwt-go"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/tungnt244/scoville_website_v2/api/main/db"
@@ -12,6 +13,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 	"fmt"
 )
@@ -80,11 +82,12 @@ func CreateUser(c echo.Context) error {
 	// if existedEmail.Email == u.Email {
 	// 	return c.JSON(http.StatusOK, "Email already existed")
 	// }
-	tempUserId, err := db.Manager.SaveUser(u.Email, string(hashedPassword))
+	userId, err := db.Manager.SaveUser(u.Email, string(hashedPassword))
+
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-	return c.JSON(http.StatusOK, tempUserId)
+	return c.JSON(http.StatusOK, []string{strconv.Itoa(userId), "Successful Created"})
 
 }
 
@@ -110,6 +113,14 @@ func UpdateUser(c echo.Context) error {
 }
 
 func Login(c echo.Context) error {
+	// Load information in environment
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	tokenSecretString := os.Getenv("SECRET_TOKEN_STRING")
+	// tokenExpireTime := os.Getenv("TOKEN_EXPIRE_TIME")
+
 	u := new(model.User)
 
 	if err := c.Bind(u); err != nil {
@@ -129,11 +140,28 @@ func Login(c echo.Context) error {
 		return c.String(http.StatusNotFound, "The Password is not correct")
 	}
 
-	user, err := db.Manager.GetUserByEmailAndPass(u.Email, userCheckPassword.Password)
+	_, err = db.Manager.GetUserByEmailAndPass(u.Email, userCheckPassword.Password)
 	if err != nil {
 		return c.String(http.StatusBadRequest, "Email or Password is not correct")
 	}
-	return c.JSON(http.StatusOK, user.Email)
+
+	token := jwt.New(jwt.SigningMethodHS256)
+
+	// Set claims
+	claims := token.Claims.(jwt.MapClaims)
+	claims["email"] = u.Email
+	claims["exp"] = time.Now().Add(time.Hour * 12).Unix()
+
+	// token.Claims = claims
+	// Sign the token with our secret
+	tokenString, err := token.SignedString([]byte(tokenSecretString))
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, map[string]string{
+		"token": tokenString,
+	})
 }
 
 func DeleteUser(c echo.Context) error {
