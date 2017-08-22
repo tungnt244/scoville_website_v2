@@ -16,7 +16,6 @@ import reducers from '../client/modules'
 
 import getArticlesBrief from './api/getArticlesBrief';
 import deleteArticleById from './api/deleteArticleById';
-import login from './api/login';
 import checkToken from './api/CheckToken';
 
 import {getForms, getSingleForm, putSingleForm, deleteSingleForm} from './api/Form';
@@ -88,20 +87,6 @@ router.get('/admin/checktoken', (req, res) => {
   checkToken(req.get("Authorization"), (isValid) => {
     if(isValid) res.send({isValid: isValid})
     else return res.send("Token is not valid")  
-  })
-})
-
-router.post('/admin/login', (req, res) => {
-  login(req.body, (response) => {
-    if(response.token){
-      return res.send({
-        email: response.email,
-        token: response.token
-      })
-    }else {
-      console.log('error : ', response.error)
-      return res.status(401).send(response.error)
-    }
   })
 })
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Col, ControlLabel, FormControl, FormGroup, Button, Alert} from 'react-bootstrap'
 import axios from 'axios'
-import {url} from '../config'
+import {api_url} from '../config'
 import {Redirect} from 'react-router-dom'
 import checkValidToken from './CheckValidToken'
 import {connect} from 'react-redux'
@@ -44,7 +44,7 @@ class AdminLogin extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        axios.post(url+'/admin/login', user).then( response => {
+        axios.post(api_url+'/login', user).then( response => {
             localStorage.setItem('token', response.data.token)
             this.props.setLogin(true)
         }).catch(error => {
