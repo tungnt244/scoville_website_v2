@@ -96,7 +96,7 @@ export default class CMSEditor extends Component {
       return <Redirect to='/admin/cms'/>
     }
     return (
-      <div className="TinyMCE">
+      <div className="TinyMCE container">
         <Form horizontal>
           <FormGroup>
             <Col componentClass={ControlLabel} sm={2}>

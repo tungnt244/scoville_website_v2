@@ -1,4 +1,5 @@
 import React from  'react'
+import Map from './Map.js'
 
 export default class AccessSection extends React.Component{
     render(){
@@ -10,7 +11,7 @@ export default class AccessSection extends React.Component{
                         <h2 className="section-heading" id="ACCESS-heading" ><big>ABOUT</big></h2>
                     </section>
                 </div>
-                <div className="modal-body row">
+                <div id="about-container" className="modal-body row">
                     <div className="col-md-5 col-sm-5 no-padding">
                         <div className="row padding-top">
                             <div className="access-1 text-right col-md-4 col-sm-4 col-xs-4">
@@ -48,7 +49,7 @@ export default class AccessSection extends React.Component{
                         </div>
                     </div>
                     <div className="col-md-7 col-sm-7 no-padding">
-                    <img className="img-responsive imgcenter" src="/images/map.png"/>
+                        <Map />
                     </div>
                 </div><br/><br/>
                 <div className="access-2 text-center">Copyright Scoville All Rights Reserved</div>

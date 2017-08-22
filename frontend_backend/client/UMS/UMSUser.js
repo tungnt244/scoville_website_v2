@@ -107,7 +107,7 @@ export default class CMSEditor extends Component {
                     </Col>
                 </FormGroup>
                 }
-                <FormGroup>
+                <FormGroup id="save-button">
                     <Col componentClass={ControlLabel} sm={2}>
                     <Button bsStyle="success" onClick={this.saveUser}>Save</Button>
                     </Col>

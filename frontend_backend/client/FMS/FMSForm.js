@@ -72,7 +72,7 @@ export default class FMSForm extends Component{
         }
         if(form){
             return(
-                <div>
+                <div className="user-manager">
                     <Form horizontal>
                         <FormGroup>
                             <Col componentClass={ControlLabel} sm={2}>

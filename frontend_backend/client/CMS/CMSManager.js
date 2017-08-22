@@ -67,7 +67,7 @@ export default class CMSManager extends Component {
             return <Redirect to={this.state.newurl}/>
         }
         return(
-            <div>
+            <div className="container">
                 <Grid>
                     <Row className="show-grid">
                         <h1>Manage Articles</h1>

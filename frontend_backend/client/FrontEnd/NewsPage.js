@@ -41,8 +41,28 @@ export default class NewsPage extends React.Component {
     }
 
     render(){
+    let url = ""
+        if(typeof(window) !== "undefined") {
+          url = window.location.href
+        }
         return(
-            <div>{this.MyComponent()}</div>
+        <div>
+            <div className="text-center">
+                <section>
+                    <h2 className="news-section-heading" ><big>NEWS</big></h2>
+                    <br/><br/>
+                  <div className="social">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}">
+                      <img className= "social-image" src="/images/facebook.png" />
+                    </a>
+                  </div>
+                </section>
+            </div>
+            <div className='container'>{this.MyComponent()}</div>
+            <footer className="gray-footer footer-text">
+                    Copyright Scoville All Rights Reserved.
+            </footer>
+        </div>
         )
     }
 }

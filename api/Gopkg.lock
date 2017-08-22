@@ -81,6 +81,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/tungnt244/scoville_website_v2"
+  packages = ["api/main/config","api/main/db","api/main/handler","api/main/helper","api/main/model"]
+  revision = "30acf22061c212281b573ecd59515115342d4a80"
+
+[[projects]]
+  branch = "master"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
   revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
@@ -124,6 +130,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6edae56b3b569a96367806a8f94a04e55dab45293e58470a164156b502d87090"
+  inputs-digest = "638ce6b3442a3b749062f85bae4a63ac8ebc60f55b57f04aefd2336feaf3e84f"
   solver-name = "gps-cdcl"
   solver-version = 1

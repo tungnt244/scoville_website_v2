@@ -78,7 +78,7 @@ class AdminLogin extends Component {
         }
         if(this.state.isLogged){
             return(
-                <div>
+                <div className="text-center">
                     <h1>You've already signed in</h1>
                     <Button className="centered" bsStyle="danger" onClick={() => this.handleLogout()}>
                         Sign out
@@ -90,7 +90,7 @@ class AdminLogin extends Component {
             )
         }else{
             return(
-                <Form horizontal>
+                <Form horizontal id="login-form">
                     {this.state.errorMessage.length > 0 && 
                     <FormGroup>
                         <Alert bsStyle="danger">

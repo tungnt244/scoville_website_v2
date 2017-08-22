@@ -5,12 +5,14 @@ export default class AdminNavbar extends React.Component{
 
     render(){
         return(
-            <ul>
-                <li><Link to='/admin'>Login</Link></li>
-                <li><Link to='/admin/cms'>Content</Link></li>
-                <li><Link to='/admin/users'>USERS</Link></li>
-                <li><Link to='/admin/forms'>FORMS</Link></li>
-            </ul>
+            <div className="collapse navbar-collapse" id="news-navbar-collapse">
+              <ul className="nav navbar-nav navbar-right">
+                    <li><Link className="news-big-word" to='/admin'>Login</Link></li>
+                    <li><Link className="news-big-word" to='/admin/cms'>Content</Link></li>
+                    <li><Link className="news-big-word" to='/admin/users'>Users</Link></li>
+                    <li><Link className="news-big-word" to='/admin/forms'>Forms</Link></li>
+              </ul>
+            </div>
         )
     }
 }

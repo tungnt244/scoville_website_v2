@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "./node_modules/.bin/nodemon ./bin/www",
-    "build:client": "webpack --debug --watch"
+    "build:client": "webpack --debug --watch",
+    "go": "go run main/main.go"
   },
   "dependencies": {
     "axios": "^0.16.2",

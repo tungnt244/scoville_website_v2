@@ -2,6 +2,7 @@ import React from  'react'
 
 export default class NewsSection extends React.Component{
     render(){
+        let url ='/news'
         return(
             <div>
                 <hr id="NEWS"/>
@@ -28,7 +29,7 @@ export default class NewsSection extends React.Component{
                     {`AIを活用したタクシー配車アプリの実用実験を今夏に開始`}</a>
                 </div>
                 <div className="text-center">
-                    <button className="btn button-news" href=""><span className="btn-word">see more</span></button>
+                    <a href={url}><button className="btn button-news"><span className="btn-word">see more</span></button></a>
                 </div>
                     <br/><br/><br/><br/><hr id="ACCESS"/>
                 </div>

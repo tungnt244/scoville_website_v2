@@ -17,12 +17,15 @@ export default class NewsSummary extends Component {
     }
 
     render(){
-        console.log('hello')
+        console.log('hello', this.state.article)
+        let id = this.state.article.id
+        let url = '/news/' + id
+        console.log('url', url)
         if(this.state.article)
             return(
                 <div>
                     <p className="date-text text-left ">2017.07.21</p>
-                    <a href="" className="text-left blue-text">
+                    <a href={url} className="text-left blue-text">
                     {`${this.state.article.title}`}
                     </a>
                 </div>
@@ -34,13 +37,3 @@ export default class NewsSummary extends Component {
         }
     }
 }
-
-// <Media>
-//                     <Media.Left>
-//                         <Thumbnail href={`/news/${this.state.article.id}`} width={64} height={64} src={this.state.article.picture} alt="Image"/>
-//                     </Media.Left>
-//                     <Media.Body>
-//                         <Media.Heading>{this.state.article.title}</Media.Heading>
-//                         <p>{this.state.article.description}</p>
-//                     </Media.Body>
-//                 </Media>

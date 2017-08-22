@@ -68,7 +68,7 @@ export default class FMSManager extends Component {
         }
         let forms = this.state.forms
         return(
-            <div>
+            <div className="container">
                 <Grid>
                     <Row className="show-grid">
                         <h1>Manage Forms</h1>
