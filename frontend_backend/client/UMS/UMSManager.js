@@ -14,6 +14,8 @@ export default class CMSManager extends Component {
             users : [],
             shouldRedirect: false
         }
+        let token = localStorage.getItem("token")
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}` 
     }
 
     editButton = (cell, row) => {
@@ -34,15 +36,15 @@ export default class CMSManager extends Component {
             <Button bsStyle="danger"
                 onClick={()=>{
                     axios.delete(api_url +'/users/'+row.ID).then(response => {
-                        axios.get(url +'/users').then(response => {
+                        axios.get(api_url +'/users').then(response => {
                             this.setState({
                                 users: response.data
                             })
                         }).catch(error => {
-                            console.log('error: ', error)
+                            console.log('error: ', error.response.data)
                         })  
                     }).catch(error => {
-                        console.log('error: ', error)
+                        console.log('error: ', error.response.data)
                     })
                 }}
             >Delete</Button>
@@ -51,13 +53,18 @@ export default class CMSManager extends Component {
 
     componentDidMount(){
         axios.get(api_url +'/users').then(response => {
-            console.log('data', response.data)
             this.setState({
                 users: response.data
             })
         }).catch(error => {
-            console.log('error: ', error)
+            console.log('error: ', error.response.data)
         })
+    }
+
+    dayFormat = (cell, row) => {
+        let date = new Date(cell)
+        let dateFormat = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`
+        return dateFormat
     }
 
     render(){
@@ -77,12 +84,12 @@ export default class CMSManager extends Component {
                         }}>Create</Button>
                     </Row>
                     <Row>
-                        <BootstrapTable data={users} >
-                            <TableHeaderColumn dataField="ID" isKey={true} >User ID</TableHeaderColumn> 
-                            <TableHeaderColumn dataField="email" >Email</TableHeaderColumn>
-                            <TableHeaderColumn dataField="CreatedAt">Created at</TableHeaderColumn>
-                            <TableHeaderColumn dataFormat={this.editButton}>Edit</TableHeaderColumn>
-                            <TableHeaderColumn dataFormat={(cell,row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn>
+                        <BootstrapTable data={users} search hover >
+                            <TableHeaderColumn dataSort width="5%" dataField="ID" isKey={true} >ID</TableHeaderColumn> 
+                            <TableHeaderColumn dataSort dataField="email" >Email</TableHeaderColumn>
+                            <TableHeaderColumn dataSort dataField="CreatedAt" dataFormat={this.dayFormat}>Created at</TableHeaderColumn>
+                            <TableHeaderColumn width="10%" dataFormat={this.editButton}>Edit</TableHeaderColumn>
+                            <TableHeaderColumn width="10%" dataFormat={(cell,row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn>
                         </BootstrapTable>
                     </Row>
                 </Grid>

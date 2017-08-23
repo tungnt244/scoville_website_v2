@@ -5,12 +5,14 @@ import {api_url} from '../../config'
 import {Redirect} from 'react-router-dom'
 import {Grid, Row, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
 
-export default class FMSManager extends Component {
+const CONTACT_API_URL = api_url+'/forms/contact'
+
+export default class CFMSManager extends Component {
 
     constructor(props){
         super(props)
         this.state = {
-            forms : [],
+            contacts : [],
             shouldRedirect: false
         }
         let token = localStorage.getItem('token')
@@ -23,7 +25,7 @@ export default class FMSManager extends Component {
             onClick={ () => {
                 this.setState({
                     shouldRedirect: true,
-                    newUrl: '/admin/forms/' + row.id
+                    newUrl: '/admin/contacts/' + row.id
                 })
             } }
         >View</Button>
@@ -34,10 +36,10 @@ export default class FMSManager extends Component {
         return(
             <Button bsStyle="danger"
                 onClick={()=>{
-                   axios.delete(api_url+'/forms/recruitment/' + row.id).then(response => {
-                       axios.get(api_url+'/forms/recruitment').then(response => {
+                   axios.delete(CONTACT_API_URL +'/'+ row.id).then(response => {
+                       axios.get(CONTACT_API_URL).then(response => {
                             this.setState({
-                                forms: response.data
+                                contacts: response.data
                             })
                         }).catch(error => {
                             console.log('error: ', error)
@@ -51,15 +53,17 @@ export default class FMSManager extends Component {
     }
 
     componentDidMount(){
-        axios.get(api_url+'/forms/recruitment').then(response => {
+        axios.get(CONTACT_API_URL).then(response => {
+            let date = new Date(response.data[0].created_at)
+            console.log(date.getFullYear())
             this.setState({
-                forms: response.data
+                contacts: response.data
             })
         }).catch(error => {
-            console.log('error: ', error)
+            console.log('didmount error: ', error)
         })
     }
-
+    
     dayFormat = (cell, row) => {
         let date = new Date(cell)
         let dateFormat = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`
@@ -72,19 +76,19 @@ export default class FMSManager extends Component {
                 <Redirect to={this.state.newUrl}/>
             )
         }
-        let forms = this.state.forms
+        let contacts = this.state.contacts
         return(
             <div className="container">
                 <Grid>
                     <Row className="show-grid">
-                        <h1>Manage Forms</h1>
+                        <h1>Manage Contact</h1>
                     </Row>
                 </Grid>
                 
-                <BootstrapTable data={forms} search hover exportCSV>
+                <BootstrapTable data={contacts} search hover exportCSV>
                     <TableHeaderColumn width="5%" dataSort dataField="id" isKey={true} >ID</TableHeaderColumn> 
-                    <TableHeaderColumn dataSort dataField="email" >Email</TableHeaderColumn>
-                    <TableHeaderColumn dataSort dataField="position">Position</TableHeaderColumn>
+                    <TableHeaderColumn dataSort dataField="company_name" >Company</TableHeaderColumn>
+                    <TableHeaderColumn dataSort dataField="staff_name">Staff</TableHeaderColumn>
                     <TableHeaderColumn dataSort dataField="status">Status</TableHeaderColumn>
                     <TableHeaderColumn dataSort dataField="created_at" dataFormat={this.dayFormat}>Created at</TableHeaderColumn>
                     <TableHeaderColumn width="10%" dataFormat={this.viewButton}>View</TableHeaderColumn>

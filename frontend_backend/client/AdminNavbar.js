@@ -11,6 +11,7 @@ export default class AdminNavbar extends React.Component{
                     <li><Link className="news-big-word" to='/admin/cms'>Content</Link></li>
                     <li><Link className="news-big-word" to='/admin/users'>Users</Link></li>
                     <li><Link className="news-big-word" to='/admin/forms'>Forms</Link></li>
+                    <li><Link className="news-big-word" to='/admin/contacts'>Contacts</Link></li>
               </ul>
             </div>
         )

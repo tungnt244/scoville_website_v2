@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import axios from 'axios'
-import {url} from '../../config'
+import {api_url} from '../../config'
 import {Grid, Row, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 
@@ -14,7 +14,7 @@ export default class CMSManager extends Component {
             shouldRedirect: false,
         }
         let token = localStorage.getItem('token')
-        axios.defaults.headers.common['Authorization'] = token
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
     }
 
     editButton = (cell, row) => {
@@ -34,8 +34,8 @@ export default class CMSManager extends Component {
         return(
             <Button bsStyle="danger"
                 onClick={()=>{
-                    axios.delete(url +'/cms/news/'+row.id).then(response => {
-                        axios.get(url +'/cms/news/brief').then(response => {
+                    axios.delete(api_url +'/news/'+row.id).then(response => {
+                        axios.get(api_url +'/news/brief').then(response => {
                             this.setState({
                                 articles: response.data
                             })
@@ -49,10 +49,16 @@ export default class CMSManager extends Component {
             >Delete</Button>
         )
     }
+    
+    dayFormat = (cell, row) => {
+        let date = new Date(cell)
+        let dateFormat = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`
+        return dateFormat
+    }
 
     componentDidMount(){
         
-        axios.get(url +'/cms/news/brief').then(response => {
+        axios.get(api_url +'/news/brief').then(response => {
             this.setState({
                 articles: response.data
             })
@@ -81,13 +87,14 @@ export default class CMSManager extends Component {
                         }}>Create</Button>
                     </Row>
                 </Grid>
-                
-                <BootstrapTable data={articles} >
-                    <TableHeaderColumn dataField="id" isKey={true} >Article ID</TableHeaderColumn> 
-                    <TableHeaderColumn dataField="title" >Title</TableHeaderColumn>
-                    <TableHeaderColumn dataField="description">Description</TableHeaderColumn>
-                    <TableHeaderColumn dataFormat={this.editButton}>Edit</TableHeaderColumn>
-                    <TableHeaderColumn dataFormat={(cell,row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn>
+                <br/>
+                <BootstrapTable data={articles} search hover >
+                    <TableHeaderColumn width="5%" dataField="id" isKey={true} dataSort>ID</TableHeaderColumn> 
+                    <TableHeaderColumn dataSort dataField="title" dataSort>Title</TableHeaderColumn>
+                    <TableHeaderColumn dataSort dataField="description">Description</TableHeaderColumn>
+                    <TableHeaderColumn dataSort dataField="created_at" dataFormat={this.dayFormat}>Created at</TableHeaderColumn>
+                    <TableHeaderColumn width="10%" dataFormat={this.editButton}>Edit</TableHeaderColumn>
+                    <TableHeaderColumn width="10%" dataFormat={(cell,row) => this.deleteButton(cell, row)}>Delete</TableHeaderColumn>
                 </BootstrapTable>
             </div>
         )

@@ -16,6 +16,8 @@ export default class CMSEditor extends Component {
       isEdit: false,
       shouldRedirect: false
     }
+    let token = localStorage.getItem('token')
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   }
 
   componentDidMount(){

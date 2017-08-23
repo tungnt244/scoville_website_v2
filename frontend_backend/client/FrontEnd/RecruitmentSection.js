@@ -12,8 +12,8 @@ export default class RecruitmentSection extends React.Component{
       this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit=(event) =>{
-      // event.stopPropagation()
-      // event.preventDefault()
+      event.stopPropagation()
+      event.preventDefault()
       console.log('in handle submit')
       axios.post(api_url + '/forms/recruitment', {
           email: this.state.email,
@@ -25,7 +25,7 @@ export default class RecruitmentSection extends React.Component{
           alert('your form has been successfully submitted');
         })
         .catch(function (error) {
-          console.log('error: ', error);
+          console.log('error: ', error.response);
         });
         this.setState({email: ''});
         this.setState({github: ''});
