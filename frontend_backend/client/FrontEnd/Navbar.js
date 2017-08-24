@@ -14,7 +14,6 @@ export default class Navbar extends React.Component{
       this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(event) {
-      console.log(this.state.company);
       axios.post(api_url + '/forms/contact', {
           company_name: this.state.company,
           staff_name: this.state.staff,
@@ -61,7 +60,7 @@ export default class Navbar extends React.Component{
                                 <span className="icon-bar"></span>
                             </button>
                         </div>
-                        <a id="logo-container" className="navbar-brand scroll" >
+                        <a href='/' id="logo-container" className="navbar-brand scroll" >
                             <img className="img-responsive" id="logo" src="./images/logo.png" title="" />
                         </a>
                         <div className="collapse navbar-collapse" id="navbar-collapse">

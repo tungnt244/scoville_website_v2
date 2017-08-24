@@ -27,7 +27,7 @@ export default class NewsPage extends React.Component {
             })
         }else{
             this.setState({
-                content: 'Can not load the article'
+                content: 'Can not load the new'
             })
         }
     }

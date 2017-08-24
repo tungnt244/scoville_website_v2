@@ -8,14 +8,14 @@ export default class NewsList extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            articles: []
+            news: []
         }
     }
 
     componentDidMount(){
         axios.get(api_url +'/news/brief').then(response => {
             this.setState({
-                articles: response.data
+                news: response.data
             })
         }).catch(error => {
             console.log('error: ', error)
@@ -23,18 +23,16 @@ export default class NewsList extends React.Component {
     }
 
     renderAllSummary(){
-        let articles = this.state.articles
+        let news = this.state.news
         let temp = []
-        for(let i=0; i<articles.length; i++){
-            console.log(i, JSON.stringify(articles[i], null, 4))
-            temp.push(<NewsSummary key={articles[i].id} article={articles[i]}/>
+        for(let i=0; i<news.length; i++){
+            temp.push(<NewsSummary key={news[i].id} new={news[i]}/>
         )}
-        console.log('temp', temp)
         return temp
     }
 
     render(){
-        if(this.state.articles.length > 0){
+        if(this.state.news.length > 0){
             return(
                 <div>
                     <div className="container" id="newslist-container">
