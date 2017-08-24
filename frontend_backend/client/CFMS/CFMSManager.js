@@ -55,12 +55,11 @@ export default class CFMSManager extends Component {
     componentDidMount(){
         axios.get(CONTACT_API_URL).then(response => {
             let date = new Date(response.data[0].created_at)
-            console.log(date.getFullYear())
             this.setState({
                 contacts: response.data
             })
         }).catch(error => {
-            console.log('didmount error: ', error)
+            console.log('error: ', error)
         })
     }
     

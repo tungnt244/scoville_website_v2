@@ -7,7 +7,7 @@ export function actionSetLogin(isLogged){
   }
 }
 
-export default function setLogin(state = false, action){
+export default function setLogin(state = null, action){
   switch(action.type){
     
     case SET_LOGIN:{
@@ -15,7 +15,7 @@ export default function setLogin(state = false, action){
     }
 
     default:
-      return false
+      return state
   }
 
 }

@@ -49,7 +49,7 @@ class AdminLogin extends Component {
             this.props.setLogin(true)
         }).catch(error => {
             let errorMessage = ''
-            if(typeof error.response != 'undefined'){
+            if(typeof error.response != 'undefined' && error.response){
                 errorMessage = error.response.data
             }
             this.setState({
@@ -61,7 +61,7 @@ class AdminLogin extends Component {
 
     handleLogout() {
         localStorage.clear()
-        this.props.setLogin(false)
+        this.setState({shouldRedirect: true},() => this.props.setLogin(false))
     }
 
     componentWillReceiveProps(nextProps){
@@ -74,7 +74,7 @@ class AdminLogin extends Component {
 
     render(){
         if(this.state.shouldRedirect){
-            return <Redirect to='/admin/cms'/>
+            return <Redirect to='/admin'/>
         }
         if(this.state.isLogged){
             return(
@@ -93,9 +93,12 @@ class AdminLogin extends Component {
                 <Form horizontal id="login-form">
                     {this.state.errorMessage.length > 0 && 
                     <FormGroup>
-                        <Alert bsStyle="danger">
-                            <strong>{this.state.errorMessage}</strong>
-                        </Alert>
+                        <Col sm={2}/>
+                        <Col sm={4}>
+                            <Alert className="text-center" bsStyle="danger">
+                                <strong>{this.state.errorMessage}</strong>
+                            </Alert>
+                        </Col>
                     </FormGroup>
                     }
                     <FormGroup>
