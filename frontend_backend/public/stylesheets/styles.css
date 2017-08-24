@@ -12,8 +12,26 @@
 
 
 
+/* start styles for newspage*/
 
+.newspage-button, .newspage-button:hover {
+  cursor: pointer;
+  background-color: transparent;
+  font: 2.5vmin HiraKakuProN-W6;
+  text-decoration: none;
+  color: #333333;
+  padding: 1vmax 2.5vmax 1vmax 2.5vmax;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+.button-container{
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 
+/* end styles for newspage*/
 
 /* start of news layout style*/
 
@@ -26,10 +44,6 @@
 }
 #newslist-container{
  padding-bottom: 8vh;
-}
-.news-layout{
-  min-height: 100vh;
-  position: relative;
 }
 a.news-big-word.text-right{
   color: black;
@@ -651,14 +665,15 @@ img#mainimage.img-responsive{
   margin-left: 0.5%;
   margin-right: 0.5%;
 }
+.body-wrapper{
+  min-height: 92vh;
+}
 .gray-footer{
   background-color: rgba(239, 239, 239, 0.8);
   padding-top: 1%;
   padding-bottom: 1%;
   margin-top: 3%;
   width: 100vw;
-  position: absolute;
-  bottom: 0px;
 }
 .footer-text{
   font-family: Helvetica;

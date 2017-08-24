@@ -35,15 +35,15 @@ export default class NewsList extends React.Component {
         if(this.state.news.length > 0){
             return(
                 <div>
-                    <div className="container" id="newslist-container">
+                    <div className="container body-wrapper" id="newslist-container">
                         <div className="text-center">
                             <section>
                                 <h2 className="news-section-heading" ><big>NEWS</big></h2>
                                 <br/><br/>
                             </section>
                         </div>
-                            {this.renderAllSummary()}
-                        </div>
+                        {this.renderAllSummary()}
+                    </div>
                     <footer className="gray-footer footer-text">
                         Copyright Scoville All Rights Reserved.
                     </footer>

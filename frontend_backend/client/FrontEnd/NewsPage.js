@@ -41,6 +41,8 @@ export default class NewsPage extends React.Component {
     }
 
     render(){
+        let link=''
+        let back = link+'/news'
         const text = this.state.title;
         let url = "";
         if(typeof(window) !== "undefined") {
@@ -48,7 +50,7 @@ export default class NewsPage extends React.Component {
         }
         return(
             <div>
-                <div className="text-center">
+                <div className="body-wrapper text-center">
                     <section>
                         <h2 className="news-section-heading" ><big>NEWS</big></h2>
                         <br/><br/>
@@ -61,9 +63,13 @@ export default class NewsPage extends React.Component {
                             </a>
                         </div>
                     </section>
-                </div>
-                <div className='container'>
-                    {this.MyComponent()}
+                    <div className='container text-left'>
+                        {this.MyComponent()}
+                    </div>
+                    <div className="button-container text-center">
+                        <a href={back} className="newspage-button">前のニュースのタイトル</a>
+                        <a href="#" className="newspage-button">次のニュースのタイトル</a>
+                    </div>
                 </div>
                 <footer className="gray-footer footer-text">
                         Copyright Scoville All Rights Reserved.
