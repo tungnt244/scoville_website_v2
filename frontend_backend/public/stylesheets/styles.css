@@ -37,7 +37,6 @@ a.news-big-word.text-right{
   padding-right: 5%;
   text-align: center;
   white-space: pre;
-  background-color: rgba(239, 239, 239, 0.8);
   cursor: pointer;
 }
 .news-big-word{
@@ -46,7 +45,6 @@ a.news-big-word.text-right{
   font-weight: bold;
   color: #070707;
   font-size: 1.7vw;
-  background-color: rgba(255, 255, 255, 0.8);
 }
 /* end of news layout style*/
 
