@@ -56,7 +56,6 @@ export default class FMSForm extends Component{
             status: FORM_STATUS[this.state.status_key]
         }).then(response => {
             alert('Successful updated')
-            console.log('response', response)
         }).catch(error => {
             console.log('error: ', error)
         })

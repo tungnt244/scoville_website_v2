@@ -13,45 +13,61 @@ import {actionSetLogin} from './modules/isLogin'
 class AdminLayout extends React.Component{
     constructor(props){
         super(props)
-        this.state = {
-            isLogged: this.props.isLogged
-        }
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.isLogged != this.state.isLogged){
-            this.setState({
-                isLogged: nextProps.isLogged
-            })
-        }
+        this.setState({
+            isLogged: nextProps.isLogged
+        })
     }
 
     componentDidMount(){
         if(localStorage.getItem("token")) {
-            checkValidToken(()=>{
-                this.props.setLogin(true)
+            checkValidToken().then(response => {
+                if(response.data){
+                    return this.props.setLogin(true)
+                }
+            }).catch(error => {
+                if(error.response){
+                    console.log('error: ', error.response)
+                }else if(error.request){
+                    console.log('error: '. error.request)
+                }else{
+                    console.log('error: ', error)
+                }
+                return this.props.setLogin(false)
             })
-        } else{localStorage.clear()}
+        } else {
+            return this.props.setLogin(false)
+        }
+        
     }
 
     render(){
+        if(!this.state) {
+            return(
+                <h1 className="text-center">Please wait...</h1>
+            )
+        }
+
         if(!this.state.isLogged){
             return(
             <div>
-                <AdminNavbar/>
                 <Route exact path='/admin' component={AdminLogin}/>
             </div>
             )
         }
+
         return(
             <div>
                 <AdminNavbar/>
                 <Switch>
-                    <Route exact path='/admin' component={AdminLogin}/>
+                    <Route exact path='/admin' component={CMSLayout}/>
                     <Route path='/admin/cms' component={CMSLayout}/>
                     <Route path='/admin/users' component={UMSLayout}/>
                     <Route path='/admin/forms' component={FMSLayout}/>
                     <Route path='/admin/contacts' component={CFMSLayout}/>
+                    <Route path='/admin/logout' component={AdminLogin}/>
                 </Switch>              
             </div>
         )

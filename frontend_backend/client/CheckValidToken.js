@@ -12,17 +12,8 @@ export default function checkValidToken(callback){
                 'Authorization': `Bearer ${token}`
             }
         });
-        
-        instance.post()
-        .then(response => {
-            if(response.data){
-                callback()
-                return
-            }
-        }).catch(error => {
-            console.log('error: ' + error)
-            return
-        })
+
+        return instance.post()
     }
-    return
+    return false
 }
