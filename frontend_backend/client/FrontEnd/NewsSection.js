@@ -1,6 +1,32 @@
 import React from  'react'
-
+import axios from 'axios'
+import {api_url} from '../../config'
+import NewsSummary from './NewsSummary'
 export default class NewsSection extends React.Component{
+
+    constructor(props){
+        super(props)
+    }
+
+    componentDidMount(){
+        axios.get(api_url +'/news/brief').then(response => {
+            this.setState({
+                news: response.data
+            })
+        }).catch(error => {
+            console.log('error: ', error)
+        })
+    }
+
+    renderAllSummary(){
+        let news = this.state.news
+        let temp = []
+        for(let i=0; i<news.length && i<4; i++){
+            temp.push(<NewsSummary key={news[i].id} new={news[i]}/>
+        )}
+        return temp
+    }
+
     render(){
         let url ='/news'
         return(
@@ -13,30 +39,7 @@ export default class NewsSection extends React.Component{
                             <br/><br/>
                         </section>
                     </div>
-                    <div>
-                        <p className="date-text text-left ">
-                            2017.07.21
-                        </p>
-                        <a href="" className="text-left blue-text">
-                            {`AIを活用したタクシー配車アプリの実用実験を今夏に開始、早くも兆…`}
-                        </a>
-                    </div>
-                    <div>
-                        <p className="date-text text-left">
-                            2017.06.21
-                        </p>
-                        <a href="" className="text-left blue-text">
-                            {`タローがコーポレートサイトのリニューアルを開始`}
-                        </a>
-                    </div>
-                    <div>
-                        <p className="date-text text-left">
-                            2017.04.15
-                        </p>
-                        <a href="" className="text-left blue-text">
-                            {`AIを活用したタクシー配車アプリの実用実験を今夏に開始`}
-                        </a>
-                    </div>
+                    {this.state && this.renderAllSummary()}
                     <div className="text-center">
                         <a href={url}><button className="btn button-news"><span className="btn-word">see more</span></button></a>
                     </div>
