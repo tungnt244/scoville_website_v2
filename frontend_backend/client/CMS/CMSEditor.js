@@ -44,7 +44,7 @@ export default class CMSEditor extends Component {
     })
   }
 
-  saveArtical = (e) => {
+  saveNews = (e) => {
     if(this.state.isEdit){
       axios.put(api_url +'/news/' + this.state.id, {
         Title: this.state.title,
@@ -126,7 +126,7 @@ export default class CMSEditor extends Component {
           </FormGroup>
           <FormGroup>
             <Col componentClass={ControlLabel} sm={2}>
-              <Button bsStyle="success" onClick={this.saveArtical}>Save</Button>
+              <Button bsStyle="success" onClick={this.saveNews}>Save</Button>
             </Col>
             <Col componentClass={ControlLabel} sm={2}>
               <Button bsStyle="danger" onClick={()=>{this.setState({shouldRedirect: true})}}>Discard</Button>

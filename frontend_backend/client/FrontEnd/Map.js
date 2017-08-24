@@ -1,4 +1,5 @@
 import React from  'react'
+import {api_key} from '../../config'
 
 export default class Map extends React.Component{
     render(){
@@ -6,8 +7,7 @@ export default class Map extends React.Component{
         <div>
             <div id="map">
             </div>
-            <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFy-TNiruUIbJn1LZEpkuJBzilGc_s5po&callback=initMap">
+            <script async defer src={"https://maps.googleapis.com/maps/api/js?key="+api_key+"&callback=initMap"}>
             </script>
         </div>
         )

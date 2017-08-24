@@ -7,7 +7,6 @@ export default class NewsSummary extends Component {
         this.state = {
             article: this.props.article || 'AIを活用したタクシー配車アプリの実用実験を今夏に開始、早くも兆…'
         }
-        
     }
 
     componentWillReceiveProps(nextProps){
@@ -24,9 +23,11 @@ export default class NewsSummary extends Component {
         if(this.state.article)
             return(
                 <div>
-                    <p className="date-text text-left ">2017.07.21</p>
+                    <p className="date-text text-left ">
+                        2017.07.21
+                    </p>
                     <a href={url} className="text-left blue-text">
-                    {`${this.state.article.title}`}
+                        {`${this.state.article.title}`}
                     </a>
                 </div>
             )
