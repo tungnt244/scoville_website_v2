@@ -4,13 +4,15 @@ import axios from 'axios'
 import {Grid, Row, DropdownButton, MenuItem, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 
-const FORM_STATUS = {
+const CONTACT_STATUS = {
     0 : 'Not Processed',
     1 : 'Processing',
     2 : 'Processed'
 }
 
-export default class FMSForm extends Component{
+const CONTACT_API_URL = api_url+'/forms/contact'
+
+export default class CFMSForm extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -22,23 +24,15 @@ export default class FMSForm extends Component{
 
     componentDidMount(){
         if(this.props.match.params.id){
-            axios.get(api_url +'/forms/recruitment/'+this.props.match.params.id).then(response => {
-                let {id, email, self_pr, link_github, position, status, CreateAt} = response.data
+            axios.get(CONTACT_API_URL + '/'+this.props.match.params.id).then(response => {
+                let {id, company_name, staff_name, email_address, phone_number, description_of_contact, status, created_at} = response.data
                 let status_key
                 if(status == 'Not Processed')
                     status_key = 0
                 else if(status == 'Processing')
                     status_key = 1
                 else status_key = 2
-                this.setState({
-                    id: id,
-                    email: email,
-                    self_pr: self_pr,
-                    link_github: link_github,
-                    position: position,
-                    status_key: status_key,
-                    created_at: created_at,
-                })
+                this.setState({id, company_name, staff_name, email_address, phone_number, description_of_contact, status, created_at,status_key})
             }).catch(error => {
                 console.log('error: ', error)
             })
@@ -51,9 +45,9 @@ export default class FMSForm extends Component{
         })  
     }
 
-    saveForm (e){
-        axios.put(api_url + '/forms/recruitment/' + this.state.id, {
-            status: FORM_STATUS[this.state.status_key]
+    saveContact (e){
+        axios.put(CONTACT_API_URL + '/' + this.state.id, {
+            status: CONTACT_STATUS[this.state.status_key]
         }).then(response => {
             alert('Successful updated')
             console.log('response', response)
@@ -63,13 +57,13 @@ export default class FMSForm extends Component{
     }
 
     render(){
-        let form = this.state
+        let contact = this.state
         if(this.state.shouldRedirect){
             return(
                 <Redirect to={this.state.newUrl}/>
             )
         }
-        if(form){
+        if(contact){
             return(
                 <div className="user-manager">
                     <Form horizontal>
@@ -78,39 +72,55 @@ export default class FMSForm extends Component{
                             {'Id: '}
                             </Col>
                             <Col sm={6}>
-                            <FormControl type="text" placeholder="Id" value={form.id} readOnly={true}/>
+                            <FormControl type="text" placeholder="Id" value={contact.id} readOnly={true}/>
                             </Col>
                         </FormGroup>
                         <FormGroup>
                             <Col componentClass={ControlLabel} sm={2}>
-                            {'Email: '}
+                            {'Company: '}
                             </Col>
                             <Col sm={6}>
-                            <FormControl type="text" placeholder="Email" value={form.email} readOnly={true}/>
+                            <FormControl type="text" placeholder="Company" value={contact.company_name} readOnly={true}/>
                             </Col>
                         </FormGroup>
                         <FormGroup>
                             <Col componentClass={ControlLabel} sm={2}>
-                            {'Self presentation: '}
+                            {'Name: '}
                             </Col>
                             <Col sm={6}>
-                            <FormControl type="text" placeholder="Presentation" value={form.self_pr} readOnly={true}/>
+                            <FormControl type="text" placeholder="Name" value={contact.staff_name} readOnly={true}/>
                             </Col>
                         </FormGroup>
                         <FormGroup>
                             <Col componentClass={ControlLabel} sm={2}>
-                            {"Github's link: "}
+                            {"Email address: "}
                             </Col>
                             <Col sm={6}>
-                            <FormControl type="text" placeholder="Github's link" value={form.link_github} readOnly={true}/>
+                            <FormControl type="text" placeholder="Email address" value={contact.email_address} readOnly={true}/>
                             </Col>
                         </FormGroup>
                         <FormGroup>
                             <Col componentClass={ControlLabel} sm={2}>
-                            {'Position: '}
+                            {'Phone: '}
                             </Col>
                             <Col sm={6}>
-                            <FormControl type="text" placeholder="Position" value={form.position} readOnly={true}/>
+                            <FormControl type="text" placeholder="Phone" value={contact.phone_number} readOnly={true}/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <Col componentClass={ControlLabel} sm={2}>
+                            {'Description: '}
+                            </Col>
+                            <Col sm={6}>
+                            <FormControl type="text" placeholder="Description" value={contact.description_of_contact} readOnly={true}/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <Col componentClass={ControlLabel} sm={2}>
+                            {'Created at: '}
+                            </Col>
+                            <Col sm={6}>
+                            <FormControl type="text" placeholder="Created at" value={contact.created_at} readOnly={true}/>
                             </Col>
                         </FormGroup>
                         <FormGroup>
@@ -118,7 +128,7 @@ export default class FMSForm extends Component{
                             {'Status: '}
                             </Col>
                             <Col sm={6}>
-                            <DropdownButton onSelect={(key, e) => {this.changeStatus(key,e)}} title={FORM_STATUS[form.status_key]} id="bg-nested-dropdown">
+                            <DropdownButton onSelect={(key, e) => {this.changeStatus(key,e)}} title={CONTACT_STATUS[contact.status_key]} id="bg-nested-dropdown">
                                 <MenuItem eventKey="0">Not processed</MenuItem>
                                 <MenuItem eventKey="1">Processing</MenuItem>
                                 <MenuItem eventKey="2">Processed</MenuItem>
@@ -127,13 +137,13 @@ export default class FMSForm extends Component{
                         </FormGroup>
                         <FormGroup>
                             <Col componentClass={ControlLabel} sm={2}>
-                            <Button bsStyle="success" onClick={(e) => this.saveForm(e)}>Save</Button>
+                            <Button bsStyle="success" onClick={(e) => this.saveContact(e)}>Save</Button>
                             </Col>
                             <Col componentClass={ControlLabel} sm={2}>
                             <Button bsStyle="danger" onClick={() =>this.setState({
                                 shouldRedirect: true,
-                                newUrl: '/admin/forms'
-                                })}>Back to FMS</Button>
+                                newUrl: '/admin/contacts'
+                                })}>Discard</Button>
                             </Col>
                         </FormGroup>
                     </Form>

@@ -1,21 +1,21 @@
 import axios from 'axios'
-import {url} from '../config'
+import {api_url} from '../config'
 
 export default function checkValidToken(callback){
     let token = localStorage.getItem('token')
     if(token){
         var instance = axios.create({
-            baseURL: url + '/admin/checktoken',
+            baseURL: api_url + '/checkToken',
             timeout: 10000,
             headers: {
                 'Content-Type': 'application/json', 
-                'Authorization': token
+                'Authorization': `Bearer ${token}`
             }
         });
         
-        instance.get()
+        instance.post()
         .then(response => {
-            if(response.data.isValid){
+            if(response.data){
                 callback()
                 return
             }

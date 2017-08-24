@@ -14,6 +14,8 @@ export default class CMSEditor extends Component {
             isEdit: false,
             shouldRedirect: false
         }
+        let token = localStorage.getItem("token")
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
     }
 
     componentDidMount(){
@@ -47,7 +49,8 @@ export default class CMSEditor extends Component {
                 shouldRedirect:true
             })
         }).catch(error => {
-            console.log('error: ', error)
+            alert(error.response.data)
+            console.log('error: ', error.response)
         })
         }
     }
@@ -85,7 +88,7 @@ export default class CMSEditor extends Component {
                     {'Email: '}
                     </Col>
                     <Col sm={6}>
-                    <FormControl type="text" placeholder="Email" value={this.state.email} onChange={this.changeEmail}/>
+                    <FormControl type="text" placeholder="Email@gmail.com" value={this.state.email} onChange={this.changeEmail}/>
                     </Col>
                 </FormGroup>
                 }

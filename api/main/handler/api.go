@@ -15,7 +15,6 @@ import (
 	"os"
 	"strconv"
 	"time"
-	"fmt"
 )
 
 const (
@@ -325,7 +324,6 @@ func UpdateFormRecruitment(c echo.Context) error {
 
 func CreateFormRecruitment(c echo.Context) error {
 	//Load values in environment files
-	fmt.Print("start function")
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
@@ -342,7 +340,6 @@ func CreateFormRecruitment(c echo.Context) error {
 	}
 	err = db.Manager.SaveFormRecruitment(formRecruitment)
 	if err != nil {
-		fmt.Printf('err of database %s', err)
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 	// Connect to Slack
@@ -364,7 +361,6 @@ func CreateFormRecruitment(c echo.Context) error {
 		},
 	})
 	if err != nil {
-		fmt.Printf('err of sending message %s', err)
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 	// Send the Email
@@ -378,10 +374,8 @@ func CreateFormRecruitment(c echo.Context) error {
 	// Send the email to Bob, Cora and Dan.
 
 	if err := d.DialAndSend(m); err != nil {
-		fmt.Printf('err of panic %s', err)
 		panic(err)
 	}
-	fmt.Print('successful')
 	return c.JSON(http.StatusOK, "Successful Created")
 }
 

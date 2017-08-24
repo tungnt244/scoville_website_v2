@@ -5,6 +5,7 @@ import {Switch, Route} from 'react-router-dom'
 import CMSLayout from './CMS/CMSLayout'
 import UMSLayout from './UMS/UMSLayout'
 import FMSLayout from './FMS/FMSLayout'
+import CFMSLayout from './CFMS/CFMSLayout'
 import checkValidToken from './CheckValidToken'
 import {connect} from 'react-redux'
 import {actionSetLogin} from './modules/isLogin'
@@ -12,7 +13,6 @@ import {actionSetLogin} from './modules/isLogin'
 class AdminLayout extends React.Component{
     constructor(props){
         super(props)
-        console.log('is logged', this.props)
         this.state = {
             isLogged: this.props.isLogged
         }
@@ -51,6 +51,7 @@ class AdminLayout extends React.Component{
                     <Route path='/admin/cms' component={CMSLayout}/>
                     <Route path='/admin/users' component={UMSLayout}/>
                     <Route path='/admin/forms' component={FMSLayout}/>
+                    <Route path='/admin/contacts' component={CFMSLayout}/>
                 </Switch>              
             </div>
         )

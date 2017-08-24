@@ -3,6 +3,7 @@ import axios from 'axios';
 import {api_url} from '../../config';
 
 export default class RecruitmentSection extends React.Component{
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {email: '',github: '',pr: ''};
@@ -65,6 +66,61 @@ export default class RecruitmentSection extends React.Component{
                     <h2 className="modal-title text-center" id="exampleModalLabel">Recruitment</h2>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
+=======
+    constructor(props) {
+      super(props);
+      this.state = {email: '',github: '',pr: ''};
+      this.handleChangeEmail = this.handleChangeEmail.bind(this);
+      this.handleChangeGithub = this.handleChangeGithub.bind(this);
+      this.handleChangePr = this.handleChangePr.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleSubmit=(event) =>{
+      event.stopPropagation()
+      event.preventDefault()
+      console.log('in handle submit')
+      axios.post(api_url + '/forms/recruitment', {
+          email: this.state.email,
+          self_pr: this.state.pr,
+          link_github: this.state.github,
+        })
+        .then(function (response) {
+          console.log('response', response);
+          alert('your form has been successfully submitted');
+        })
+        .catch(function (error) {
+          console.log('error: ', error.response);
+        });
+        this.setState({email: ''});
+        this.setState({github: ''});
+        this.setState({pr: ''});
+    }
+    handleChangeEmail(event) {
+      this.setState({email: event.target.value});
+    }
+    handleChangeGithub(event) {
+      this.setState({github: event.target.value});
+    }
+    handleChangePr(event) {
+      this.setState({pr: event.target.value});
+    }
+    render(){
+        return(
+            <div>
+                <div className="container-fluid" id="RECRUITMENT-container" >
+                    <section>
+                        <h2 className="text-center section-heading"><big>{`RECRUIT`}</big></h2>
+                    </section><br/><br/><br/><br/><br/>
+                <div className="row small-row">
+                    <div id="equal-height-1" className="white-col col-lg-5 col-md-5">
+                        <img className="img-responsive imgcenter" src="/images/recruit_engineer.png"/>
+                        <p className="big-recruit japanese-text text-center">エンジニア</p>
+                    <div>
+                    <p className="recruit-text">問題発見解決能力に長けていること。</p>
+                   <div className="text-center">
+                    <button type="button" id="apply-button" className="btn-danger btn big-recruit-1" data-toggle="modal" data-target="#apply-engineer">
+                        エントリー
+>>>>>>> 12e12136c646f2ca58d265efdd89902349db944c
                     </button>
                   </div>
                   <div className="modal-body">
