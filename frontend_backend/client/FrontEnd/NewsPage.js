@@ -41,7 +41,8 @@ export default class NewsPage extends React.Component {
     }
 
     render(){
-        let url = ""
+        const text = this.state.title;
+        let url = "";
         if(typeof(window) !== "undefined") {
           url = window.location.href
         }
@@ -54,6 +55,9 @@ export default class NewsPage extends React.Component {
                         <div className="social">
                             <a href="https://www.facebook.com/sharer/sharer.php?u=${url}">
                               <img className= "social-image" src="/images/facebook.png" />
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}">
+                              <img className= "social-image" src="/images/twitter.png" />
                             </a>
                         </div>
                     </section>
