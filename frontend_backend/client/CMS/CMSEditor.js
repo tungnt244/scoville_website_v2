@@ -93,6 +93,23 @@ export default class CMSEditor extends Component {
     })
   }
 
+  getTinyMCE(content=""){
+    return (
+      <TinyMCE
+        content={content}
+        config={{
+          plugins: 'link image code textcolor colorpicker',
+          toolbar: 'undo redo | bold italic underline | fontselect fontsizeselect forecolor backcolor | alignleft aligncenter alignright | code | link image',
+          width: '100%',
+          height: 400,
+          autoresize_min_height: 400,
+          autoresize_max_height: 800,
+        }}
+        onChange={this.handleEditorChange}
+      />
+    )
+  }
+
   render() {
     if(this.state.shouldRedirect){
       return <Redirect to='/admin/cms'/>
@@ -133,32 +150,10 @@ export default class CMSEditor extends Component {
             </Col>
           </FormGroup>
         </Form>
-        {this.state.content &&   
-        <TinyMCE
-          content={this.state.content}
-          config={{
-            plugins: 'link image code textcolor colorpicker',
-            toolbar: 'undo redo | bold italic | forecolor backcolor | alignleft aligncenter alignright | code | link image',
-            width: '100%',
-            height: 400,
-            autoresize_min_height: 400,
-            autoresize_max_height: 800,
-          }}
-          onChange={this.handleEditorChange}
-        />
+        {this.state.content &&
+          this.getTinyMCE(this.state.content)
         }{!this.state.content && 
-          <TinyMCE
-          content=""
-          config={{
-            plugins: 'link image code textcolor colorpicker',
-            toolbar: 'undo redo | bold italic | forecolor backcolor | alignleft aligncenter alignright | code | link image',
-            width: '100%',
-            height: 400,
-            autoresize_min_height: 400,
-            autoresize_max_height: 800,
-          }}
-          onChange={this.handleEditorChange}
-        />
+          this.getTinyMCE()
         } 
       </div>
     );
