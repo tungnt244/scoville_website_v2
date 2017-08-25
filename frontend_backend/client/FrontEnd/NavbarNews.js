@@ -20,7 +20,7 @@ export default class NavbarNews extends React.Component{
             </button>
           </div>
             <a id="news-logo-container" className="navbar-brand scroll" >
-                <img className="img-responsive" id="news-logo" src="./images/logo2.png" title="" />
+                <img className="img-responsive" id="news-logo" src="/images/logo2.png" title="" />
             </a>
             <div className="collapse navbar-collapse" id="news-navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
