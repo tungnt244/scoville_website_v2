@@ -48,9 +48,6 @@ export default class Navbar extends React.Component{
     render(){
         return(
             <div>
-                <div>
-                    <img className="img-responsive" id="mainimage" src="/images/mainpic.png" alt="cannot load image" />
-                </div>
                 <nav className="navbar navbar-inverse" id="my-navbar">
                     <div id="nav-container" className="container-fluid">
                         <div>

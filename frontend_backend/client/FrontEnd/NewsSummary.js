@@ -26,7 +26,7 @@ export default class NewsSummary extends Component {
                     <p className="date-text text-left ">
                         {dateFormat}
                     </p>
-                    <a href={url} className="text-left blue-text">
+                    <a href={url} className="text-left summary-text">
                         {`${this.state.new.title}`}
                     </a>
                 </div>

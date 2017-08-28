@@ -30,7 +30,13 @@
   margin-top: 5%;
   margin-bottom: 5%;
 }
-
+.summary-text{
+  color: #666666;
+  font-size: 2vmax;
+}
+.summary-text:hover{
+  color: #d04255;
+}
 /* end styles for newspage*/
 
 /* start of news layout style*/
@@ -127,8 +133,18 @@ ul.nav.navbar-nav.navbar-right{
 
 /* end of Navbar*/
 
-
-
+/* start of company section*/
+.red-line{
+  border-color: red;
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+/* end of company section*/
 
 /* start of news-Navbar*/
 
@@ -168,6 +184,9 @@ ul.nav.navbar-nav.navbar-right{
 }
 }
 @media screen and (min-width: 768px){
+  .toggle-content{
+    padding: 1vw 15vw 1vw 15vw;
+  }
   #contact-button{
     padding-left: 10%;
     margin-right: 15%;
@@ -175,9 +194,29 @@ ul.nav.navbar-nav.navbar-right{
   #right-nav{
     padding-right: 5vw;
   }
-
+  .small-row{
+  width: 80%;
+  margin: auto;
+  margin-bottom: 1%;
+  margin-top:3%;
+  }
+  .imgcenter{
+     margin: 0 auto;
+     width: 100%;
+     height: 100%;
+  }
+  #COMPANY-container{
+    background: #f0f0f0 ;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 5%;
+    padding-top: 5%;
+  }
 }
 @media screen and (max-width: 767px){
+  .toggle-content{
+    padding: 1vw 10vw 1vw 10vw;
+  }
   .big-word {
         font-size: 1.8vw;
          }
@@ -191,15 +230,28 @@ ul.nav.navbar-nav.navbar-right{
   width: 50%;
   margin-right: -20px;
 }
+.small-row{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 1%;
+}
+.imgcenter{
+   margin-top: 3%;
+   width: 100%;
+   height: 100%;
+}
+#COMPANY-container{
+    background: #f0f0f0 ;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 5%;
+    padding-top: 10%;
+}
 }
 
 #li-button{
   text-align: center;
 }
-.grey-background{
-  background-color: #f6f6f6;
-}
-
 
 .big-line-space{
   line-height: 190%;
@@ -207,36 +259,21 @@ ul.nav.navbar-nav.navbar-right{
   text-align: left;
 }
 
-.small-row{
-  width: 80%;
-  margin: auto;
-}
 #small-text{
   font-size: 1.8vmax;
   width: 95%;
 }
-.red-text{
-  font-family: Helvetica-Bold;
-  font-size: 2.4vmax;
-  font-weight: bold;
-  text-align: center;
-  color: #e84448;
-  margin-top: 7%;
-}
 .japanese-text{
-  font-size: 2.0vmax;
+  font-size: 1.7vmax;
   font-family: Hiragino Kaku Gothic Pro;
   line-height: 1.75;
   color: #000000;
   font-weight: 550;
 }
-.white-background{
-  margin: auto;
-  width: 70%;
-  background-color: rgba(255, 255, 255, 0.92);
-  margin-top: 8%;
-  padding-top: 0.1%;
-
+.red-text{
+  font-size: 1.9vmax;
+  font-family: Hiragino Kaku Gothic Pro;
+  color: #ac241f;
 }
 .company-text{
   font-size: 2.1vmax;
@@ -286,6 +323,12 @@ div.modal-body{
 #COMPANY{
   border-top: none;
 }
+.small-row-1{
+  width: 80%;
+  margin: auto;
+  margin-bottom: 1%;
+  margin-top:3%;
+}
 #SERVICES{
   border-top: none;
 }
@@ -311,15 +354,10 @@ div.modal-body{
   text-align: center;
   color: #ac241f;
 }
-img#mainimage.img-responsive{
-  margin-right: 0%;
-  padding-right: 0%;
-}
-#mainimage { 
-    height: auto;
-    width:100%;
-    margin-right: 0%;
-    padding-right: 0%;
+#my-video{
+  height: auto;
+  width: 100%;
+  margin-bottom: -5px;
 }
 #slogan{
   width: 70%;
@@ -331,13 +369,14 @@ img#mainimage.img-responsive{
 }
 
 #apply-button{
-  width:100%;
-  background-color: #ac241f;
-  float: bottom;
+  color: #ac241f;
+  width:30%;
+  background-color: white;
   margin-top: auto;
-  position: absolute;
-  bottom: 0px;
-  left:0px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #ac241f;
+  margin-top: 3%;
 }
 #button{
   text-align: center;
@@ -432,8 +471,35 @@ img#mainimage.img-responsive{
   color: #666666;
   margin-top: 5%;
 }
-.imgcenter{
-   margin: 0 auto;
+.col-lg-5{
+  padding: 0px 0px 0px 0px;
+  } 
+.col-md-5{
+  padding: 0px 0px 0px 0px;
+}
+.col-sm-5{
+  padding: 0px 0px 0px 0px;
+}
+
+.hover:hover .overlay {
+  opacity: 1;
+  cursor: pointer;
+}
+.overlay{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: .5s ease;
+}
+.img-overlay{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 .col-md-8{
   white-space: normal;
@@ -472,31 +538,46 @@ img#mainimage.img-responsive{
   width: 100%;
   margin-left: 2%;
  }
-#COMPANY-container{
-    position: relative;
-    background: #F4F6F7 ;
-    overflow: hidden;
-    padding-bottom: 6%;
-    background-image: url("/images/scoville_office.jpg");
-    background-color: rgba(216, 216, 216, 0.4);
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
+#flex{
+  height: 500px;
+}
+#set-margin{
+  margin-top: 7%;
 }
 #RECRUITMENT-container{
-    background: url("/images/recruit_image.png");
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover;
+    height: auto;
+    background-color: rgba(240, 240, 240, 0.7);
     background-position:center;
     padding-top: 2%;
     padding-bottom: 10%;
+}
+.panel{
+    background-color: unset;
+    border: none;
+    border-radius: 0px;
+}
+.gray-container{
+  margin-top: 5%;
+  font-family: HiraKakuProN-W6;
+  font-size: 2vmax;
+  line-height: 2;
+  text-align: left;
+  color: #333333;
+}
+a.toggle-content:hover, a.toggle-content:visited, a.toggle-content:link, a.toggle-content:active
+{
+    text-decoration: none;
+}
+.toggle-content{
+  cursor: pointer;
+  font: 2.0vmax HiraKakuProN-W6;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+.pre{
+  white-space: pre;
 }
 .big-recruit{
   font-size: 2.7vmax;
@@ -516,7 +597,7 @@ img#mainimage.img-responsive{
   margin-bottom: 15%;
 }
 .big-recruit-1{
-  font-size: 2.7vmax;
+  font-size: 2.0vmax;
   font-family: HiraMaruPro-W4;
 }
 .white-col{
@@ -547,6 +628,7 @@ img#mainimage.img-responsive{
 }
 #SERVICES-container{
   padding-bottom: 7.5%;
+  background-color: white;
 }
 #services-text-container{
   width: 80%;
@@ -562,8 +644,8 @@ img#mainimage.img-responsive{
   border-top: 0px;
 }
 #ACCESS-container{
-  background-color: #483030;
-  padding-bottom: 8%; 
+  background-color: #6f0300;
+  padding-bottom: 4%; 
 }
 .left-padding{
   padding-left: 10%;
