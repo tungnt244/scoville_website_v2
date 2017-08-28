@@ -19,7 +19,7 @@ export default class NewsSummary extends Component {
         let id = this.state.new.id
         let url = '/news/' + id
         let date = new Date(this.state.new.created_at)
-        let dateFormat = `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`
+        let dateFormat = `${date.getUTCDate()}-${date.getUTCMonth()+1}-${date.getUTCFullYear()}`
         if(this.state.new)
             return(
                 <div>
