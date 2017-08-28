@@ -1,25 +1,18 @@
 import React from 'react'
-import axios from 'axios'
-import {api_url} from '../../config'
 import NewsSummary from './NewsSummary'
 
 export default class NewsList extends React.Component {
 
     constructor(props){
         super(props)
+        console.log('props', this.props)
         this.state = {
-            news: []
+            news: this.props.listNews
         }
     }
 
-    componentDidMount(){
-        axios.get(api_url +'/news/brief').then(response => {
-            this.setState({
-                news: response.data
-            })
-        }).catch(error => {
-            console.log('error: ', error)
-        })
+    componentWillReceiveProps(nextProps){
+        console.log('next', nextProps)
     }
 
     renderAllSummary(){
@@ -32,26 +25,23 @@ export default class NewsList extends React.Component {
     }
 
     render(){
-        if(this.state.news.length > 0){
-            return(
-                <div>
-                    <div className="container body-wrapper" id="newslist-container">
-                        <div className="text-center">
-                            <section>
-                                <h2 className="news-section-heading" ><big>NEWS</big></h2>
-                                <br/><br/>
-                            </section>
-                        </div>
-                        {this.renderAllSummary()}
+        console.log(this.state)
+        return(
+            <div>
+                <div className="container body-wrapper" id="newslist-container">
+                    <div className="text-center">
+                        <section>
+                            <h2 className="news-section-heading" ><big>NEWS</big></h2>
+                            <br/><br/>
+                        </section>
                     </div>
-                    <footer className="gray-footer footer-text">
-                        Copyright Scoville All Rights Reserved.
-                    </footer>
+                    {this.renderAllSummary()}
                 </div>
-            )
-        }
-        else
-            return(<div>Wait a second</div>)
+                <footer className="gray-footer footer-text">
+                    Copyright Scoville All Rights Reserved.
+                </footer>
+            </div>
+        )
     }
 }
 

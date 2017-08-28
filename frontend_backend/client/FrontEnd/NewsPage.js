@@ -1,35 +1,42 @@
 import React from 'react'
 import axios from 'axios'
 import {api_url} from '../../config'
+import {Redirect} from 'react-router-dom'
 
 export default class NewsPage extends React.Component {
     constructor(props){
         super(props)
         this.state = {
             title: 'Title',
-            content: 'Content'
+            content: 'Content',
+            shouldRedirect: false
         }
     }
 
+    getNews = (id = this.props.match.params.id) => {
+        axios.get(api_url +'/news/'+id).then(response => {
+            let {content, description, id, picture, title} = response.data
+            this.setState({
+            id: id,
+            title: title,
+            content: content,
+            avatar: picture,
+            description: description
+            })
+        }).catch(error => {
+            console.log('error: ', error)
+        })
+    }
+    
     componentDidMount(){
         if(this.props.match.params.id){
-            axios.get(api_url +'/news/'+this.props.match.params.id).then(response => {
-                let {content, description, id, picture, title} = response.data
-                this.setState({
-                id: id,
-                title: title,
-                content: content,
-                avatar: picture,
-                description: description
-                })
-            }).catch(error => {
-                console.log('error: ', error)
-            })
+            this.getNews()
         }else{
             this.setState({
                 content: 'Can not load the new'
             })
         }
+
     }
 
     createMarkup() {
@@ -40,7 +47,32 @@ export default class NewsPage extends React.Component {
         return <div dangerouslySetInnerHTML={this.createMarkup()} />;
     }
 
+    getNextNews = (e) => {
+        let id = this.state.id
+        let nextId = this.props.getNextNews(id)
+        this.setState({
+            id: nextId,
+            shouldRedirect: true,
+            newUrl: '/news/' + nextId 
+        })
+    }
+
+    getPrevNews = (e) => {
+        let id = this.state.id
+        let nextId = this.props.getPrevNews(id)
+        this.setState({
+            id: nextId,
+            shouldRedirect: true,
+            newUrl: '/news/' + nextId 
+        })
+    }
+
     render(){
+        console.log('hello')
+        if(this.state.shouldRedirect){
+            console.log('this.state', this.state.newUrl)
+            return <Redirect to={this.state.newUrl}/>
+        }
         let link=''
         let back = link+'/news'
         const text = this.state.title;
@@ -67,8 +99,8 @@ export default class NewsPage extends React.Component {
                         {this.MyComponent()}
                     </div>
                     <div className="button-container text-center">
-                        <a href={back} className="newspage-button">前のニュースのタイトル</a>
-                        <a href="#" className="newspage-button">次のニュースのタイトル</a>
+                        <button onClick={this.getPrevNews} className="newspage-button">前のニュースのタイトル</button>
+                        <button onClick={this.getNextNews} className="newspage-button">次のニュースのタイトル</button>
                     </div>
                 </div>
                 <footer className="gray-footer footer-text">
