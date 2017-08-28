@@ -19,32 +19,45 @@ export default class ServicesSection extends React.Component{
                         </p>
                     </div>
                     <div className="row small-row">
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-lg-5 col-md-5 col-sm-5">
                             <img className="img-responsive imgcenter" src="/images/HR.png"/>
                         </div>
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-lg-2 col-md-2 col-sm-2">
+                        </div>
+                        <div className="col-lg-5 col-md-5 col-sm-5">
                             <img className="img-responsive imgcenter" src="/images/media.png"/>
                         </div>
                     </div>
                     <div className="row small-row">
-                        <div className="col-lg-6 col-md-6">
-                            <img className="img-responsive imgcenter" src="/images/geeksalon.png"/>
+                        <div className="col-lg-5 col-md-5 col-sm-5">
+                            <div className="hover">
+                                <img className="imgcenter" src="/images/geeksalon.png"/>
+                                <div className="overlay">
+                                    <img className="imgcenter img-overlay" src="/images/hovergeeksalon.png"/>
+                                </div>
+                            </div>
                         </div>
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-lg-2 col-md-2 col-sm-2">
+                        </div>
+                        <div className="col-lg-5 col-md-5 col-sm-5">
                             <img className="img-responsive imgcenter" src="/images/web.png"/>
                         </div>
                     </div>
                     <div className="row small-row">
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-lg-5 col-md-5 col-sm-5">
                             <img className="img-responsive imgcenter" src="/images/food.png"/>
                         </div>
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-lg-2 col-md-2 col-sm-2">
+                        </div>
+                        <div className="col-lg-5 col-md-5 col-sm-5">
                             <img className="img-responsive imgcenter" src="/images/artificialInteligence.png"/>
                         </div>
                     </div>
                     <div className="row small-row">
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-lg-5 col-md-5 col-sm-5">
                             <img className="img-responsive imgcenter" src="/images/app.png"/>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-sm-2">
                         </div>
                     </div><br/><br/>
                     <p id="small-text" className="japanese-text text-right">

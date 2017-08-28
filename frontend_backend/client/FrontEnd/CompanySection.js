@@ -11,7 +11,7 @@ export default class CompanySection extends React.Component{
                             <big>{`COMPANY`}</big>
                         </h2>
                     </section>
-                    <div className="row small-row">
+                    <div className="row small-row-1">
                         <div className="text-left col-lg-6 col-md-6">
                             <span className="japanese-text">Our mission</span><hr className="red-line"/>
                             <p className="japanese-text">
@@ -24,7 +24,7 @@ export default class CompanySection extends React.Component{
                                 <span className="red-text">世界</span>に通じるプロダクトを創り続けます。<br/>
                             </p><br/><br/>
                         </div>
-                        <div className="col-lg-6 col-md-6">
+                        <div className="col-sm-6 col-lg-6 col-md-6">
                             <img className="img-responsive imgcenter" src="/images/company.jpg"/>
                         </div>
                     </div>

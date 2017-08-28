@@ -48,11 +48,6 @@ export default class Navbar extends React.Component{
     render(){
         return(
             <div>
-                <div id="mainimage">
-                  <video id="my-video" autoPlay="true" loop>
-                    <source src="/images/video.mp4" type="video/mp4"/>
-                  </video>
-                </div>
                 <nav className="navbar navbar-inverse" id="my-navbar">
                     <div id="nav-container" className="container-fluid">
                         <div>

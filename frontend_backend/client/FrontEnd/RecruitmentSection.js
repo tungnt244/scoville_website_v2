@@ -62,13 +62,13 @@ export default class RecruitmentSection extends React.Component{
         <div className="container-fluid" id="RECRUITMENT-container" >
           <section>
               <h2 className="text-center section-heading"><big>{`RECRUIT`}</big></h2>
-          </section><br/><br/><br/><br/><br/>
-            <div className="container">
+          </section>
+            <div id="set-margin" className="container">
               <div id="accordion">
                 <div className="panel">
                   <div className="text-center">
                     <a onClick={this.changeColor1} style={{backgroundColor:this.state.bgColor1,color:this.state.color1,pointerEvents:this.state.state1}} className="toggle-content" data-toggle="collapse" data-parent="#accordion" href="#e-content">ENGINEER</a>
-                    <a onClick={this.changeColor2} style={{backgroundColor:this.state.bgColor2,color:this.state.color2,pointerEvents:this.state.state2}} className="toggle-content" data-toggle="collapse" data-parent="#accordion" href="#s-content"> SALE </a>
+                    <a onClick={this.changeColor2} style={{backgroundColor:this.state.bgColor2,color:this.state.color2,pointerEvents:this.state.state2}} className="toggle-content pre" data-toggle="collapse" data-parent="#accordion" href="#s-content">    SALE   </a>
                   </div>
                   <div id="e-content" className="panel-collapse collapse in">
                     <div className="gray-container">
