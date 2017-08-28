@@ -68,15 +68,15 @@ export default class RecruitmentSection extends React.Component{
                 <div className="panel">
                   <div className="text-center">
                     <a onClick={this.changeColor1} style={{backgroundColor:this.state.bgColor1,color:this.state.color1,pointerEvents:this.state.state1}} className="toggle-content" data-toggle="collapse" data-parent="#accordion" href="#e-content">ENGINEER</a>
-                    <a onClick={this.changeColor2} style={{backgroundColor:this.state.bgColor2,color:this.state.color2,pointerEvents:this.state.state2}} className="toggle-content" data-toggle="collapse" data-parent="#accordion" href="#s-content">SALE</a>
+                    <a onClick={this.changeColor2} style={{backgroundColor:this.state.bgColor2,color:this.state.color2,pointerEvents:this.state.state2}} className="toggle-content" data-toggle="collapse" data-parent="#accordion" href="#s-content"> SALE </a>
                   </div>
                   <div id="e-content" className="panel-collapse collapse in">
                     <div className="gray-container">
                       <p className="text-center">求める人物像</p>
-                      <p className="text-left">
+                      <p className="text-left japanese-text">
                         Scovilleでは事業領域と同様、<br/>
                         特定の領域に絞らずProfessionalを募集しています。<br/>
-                        必須の能力は以下の２点です。<br/>
+                        必須の能力は以下の２点です。<br/><br/><br/>
                         ・多国籍なプロと働くための日常会話レベルの英語力<br/>
                         ・高い問題発見能力と豊富な解決手段の装備<br/>
                       </p>
@@ -90,12 +90,12 @@ export default class RecruitmentSection extends React.Component{
                   <div id="s-content" className="panel-collapse collapse">
                     <div className="gray-container">
                       <p className="text-center">求める人物像</p>
-                      <p className="text-left">
+                      <p className="text-left japanese-text">
                         Scovilleでは事業領域と同様、<br/>
                         特定の領域に絞らずProfessionalを募集しています。<br/>
-                        必須の能力は以下の２点です。<br/>
-                        ・多国籍なプロと働くための日常会話レベルの英語力<br/>
-                        ・高い問題発見能力と豊富な解決手段の装備<br/>
+                        必須の能力は以下の２点です。<br/><br/><br/>
+                        ・様々な企業の採用課題を発見でき、解決策を提示することができる<br/>
+                        ・社会的に価値の高い事業にコミットしたいという情熱がある<br/>
                       </p>
                     </div>
                     <div className="text-center">

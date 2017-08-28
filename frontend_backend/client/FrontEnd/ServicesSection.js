@@ -46,12 +46,12 @@ export default class ServicesSection extends React.Component{
                         <div className="col-lg-6 col-md-6">
                             <img className="img-responsive imgcenter" src="/images/app.png"/>
                         </div>
-                        <hr id="RECRUITMENT"/>
                     </div><br/><br/>
                     <p id="small-text" className="japanese-text text-right">
                         ※年内ローンチ予定事業含む 
                     </p>
                 </div>
+                <hr id="RECRUITMENT"/>
             </div>
         )
     }

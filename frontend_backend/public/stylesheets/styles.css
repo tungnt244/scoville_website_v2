@@ -133,8 +133,18 @@ ul.nav.navbar-nav.navbar-right{
 
 /* end of Navbar*/
 
-
-
+/* start of company section*/
+.red-line{
+  border-color: red;
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+/* end of company section*/
 
 /* start of news-Navbar*/
 
@@ -224,14 +234,6 @@ ul.nav.navbar-nav.navbar-right{
   font-size: 1.8vmax;
   width: 95%;
 }
-.red-text{
-  font-family: Helvetica-Bold;
-  font-size: 2.4vmax;
-  font-weight: bold;
-  text-align: center;
-  color: #e84448;
-  margin-top: 7%;
-}
 .japanese-text{
   font-size: 1.7vmax;
   font-family: Hiragino Kaku Gothic Pro;
@@ -239,13 +241,10 @@ ul.nav.navbar-nav.navbar-right{
   color: #000000;
   font-weight: 550;
 }
-.white-background{
-  margin: auto;
-  width: 70%;
-  background-color: rgba(255, 255, 255, 0.92);
-  margin-top: 8%;
-  padding-top: 0.1%;
-
+.red-text{
+  font-size: 1.9vmax;
+  font-family: Hiragino Kaku Gothic Pro;
+  color: #ac241f;
 }
 .company-text{
   font-size: 2.1vmax;
@@ -320,15 +319,10 @@ div.modal-body{
   text-align: center;
   color: #ac241f;
 }
-img#mainimage.img-responsive{
-  margin-right: 0%;
-  padding-right: 0%;
-}
-#mainimage { 
-    height: auto;
-    width:100%;
-    margin-right: 0%;
-    padding-right: 0%;
+#my-video{
+  height: auto;
+  width: 100%;
+  margin-bottom: -5px;
 }
 #slogan{
   width: 70%;
@@ -347,6 +341,7 @@ img#mainimage.img-responsive{
   border-style: solid;
   border-width: 2px;
   border-color: #ac241f;
+  margin-top: 3%;
 }
 #button{
   text-align: center;
@@ -482,19 +477,14 @@ img#mainimage.img-responsive{
   margin-left: 2%;
  }
 #COMPANY-container{
-    position: relative;
-    background: #F4F6F7 ;
-    overflow: hidden;
-    padding-bottom: 6%;
-    background-image: url("/images/scoville_office.jpg");
-    background-color: rgba(216, 216, 216, 0.4);
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
+    opacity: 70%;
+    background: #f0f0f0 ;
     height: 100%;
     width: 100%;
+    padding-bottom: 5%;
+}
+#flex{
+  height: 500px;
 }
 #RECRUITMENT-container{
     height: auto;

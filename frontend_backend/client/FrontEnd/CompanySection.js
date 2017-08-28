@@ -11,31 +11,24 @@ export default class CompanySection extends React.Component{
                             <big>{`COMPANY`}</big>
                         </h2>
                     </section>
-                    <div className="white-background">
-                        <p className="text-center red-text">
-                            {`OUR MISSION`}
-                        </p>
-                        <p className="company-text text-center">
-                            世界に通用する人と事業を創り、
-                        </p>
-                        <p className="company-text text-center">
-                            外貨獲得を通じて日本経済を牽引する
-                        </p><br/>
+                    <div className="row small-row">
+                        <div className="text-left col-lg-6 col-md-6">
+                            <span className="japanese-text">Our mission</span><hr className="red-line"/>
+                            <p className="japanese-text">
+                                世界に通用する<span className="red-text">人と事業</span>を創り、<br/>
+                                外貨獲得を通じて日本経済を牽引する。<br/>
+                            </p><br/>
+                            <span className="japanese-text">Our vision</span><hr className="red-line"/>
+                            <p className="japanese-text">
+                                <span className="red-text">連続</span>的に事業創造を行い、<br/>
+                                <span className="red-text">世界</span>に通じるプロダクトを創り続けます。<br/>
+                            </p><br/><br/>
+                        </div>
+                        <div className="col-lg-6 col-md-6">
+                            <img className="img-responsive imgcenter" src="/images/company.jpg"/>
+                        </div>
                     </div>
-                    <br/><br/>
-                    <div className="white-background">
-                        <h2 className="text-center red-text">
-                            {`OUR VISION`}
-                        </h2>
-                        <p className="company-text text-center">
-                            連続的事業創造を行い、
-                        </p>
-                        <p className="company-text text-center">
-                            世界に通ずるプロダクトを創り続ける
-                        </p>
-                        <br/><br/>
-                        <hr id="SERVICES"/>
-                    </div>
+                    <hr id="SERVICES"/>
                 </div>
             </div>
         )
