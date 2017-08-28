@@ -157,7 +157,7 @@ func Login(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
-
+	log.Fatalf("token: %s", tokenString)
 	return c.JSON(http.StatusOK, map[string]string{
 		"token": tokenString,
 	})

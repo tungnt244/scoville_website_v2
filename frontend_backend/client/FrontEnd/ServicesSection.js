@@ -20,12 +20,22 @@ export default class ServicesSection extends React.Component{
                     </div>
                     <div className="row small-row">
                         <div className="col-lg-5 col-md-5 col-sm-5">
-                            <img className="img-responsive imgcenter" src="/images/HR.png"/>
+                            <div className="hover">
+                                <img className="imgcenter" src="/images/HR.png"/>
+                                <div className="overlay">
+                                    <img className="imgcenter img-overlay" src="/images/hoverHR.png"/>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-lg-2 col-md-2 col-sm-2">
                         </div>
                         <div className="col-lg-5 col-md-5 col-sm-5">
-                            <img className="img-responsive imgcenter" src="/images/media.png"/>
+                            <div className="hover">
+                                <img className="imgcenter" src="/images/media.png"/>
+                                <div className="overlay">
+                                    <img className="imgcenter img-overlay" src="/images/hovermedia.png"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="row small-row">
@@ -40,22 +50,42 @@ export default class ServicesSection extends React.Component{
                         <div className="col-lg-2 col-md-2 col-sm-2">
                         </div>
                         <div className="col-lg-5 col-md-5 col-sm-5">
-                            <img className="img-responsive imgcenter" src="/images/web.png"/>
+                            <div className="hover">
+                                <img className="imgcenter" src="/images/web.png"/>
+                                <div className="overlay">
+                                    <img className="imgcenter img-overlay" src="/images/hoverweb.png"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="row small-row">
                         <div className="col-lg-5 col-md-5 col-sm-5">
-                            <img className="img-responsive imgcenter" src="/images/food.png"/>
+                            <div className="hover">
+                                <img className="imgcenter" src="/images/food.png"/>
+                                <div className="overlay">
+                                    <img className="imgcenter img-overlay" src="/images/hoverfood.png"/>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-lg-2 col-md-2 col-sm-2">
                         </div>
                         <div className="col-lg-5 col-md-5 col-sm-5">
-                            <img className="img-responsive imgcenter" src="/images/artificialInteligence.png"/>
+                            <div className="hover">
+                                <img className="imgcenter" src="/images/artificialIntelligence.png"/>
+                                <div className="overlay">
+                                    <img className="imgcenter img-overlay" src="/images/hoverartificialIntelligence.png"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="row small-row">
                         <div className="col-lg-5 col-md-5 col-sm-5">
-                            <img className="img-responsive imgcenter" src="/images/app.png"/>
+                            <div className="hover">
+                                <img className="imgcenter" src="/images/app.png"/>
+                                <div className="overlay">
+                                    <img className="imgcenter img-overlay" src="/images/hoverapp.png"/>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-lg-2 col-md-2 col-sm-2">
                         </div>
