@@ -45,6 +45,7 @@ class AdminLogin extends Component {
             password: this.state.password
         }
         axios.post(api_url+'/login', user).then( response => {
+            console.log('dafu', response.data)
             localStorage.setItem('token', response.data.token)
             this.props.setLogin(true)
         }).catch(error => {

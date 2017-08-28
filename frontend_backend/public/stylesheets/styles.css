@@ -367,7 +367,19 @@ div.modal-body{
   text-align: left;
   color: #f22c20;
 }
-
+.modal-footer{
+  text-align: center;
+}
+.button-form{
+  color: #ac241f;
+  width:40%;
+  background-color: white;
+  margin-top: auto;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #ac241f;
+  margin-top: 3%;
+}
 #apply-button{
   color: #ac241f;
   width:30%;
@@ -483,7 +495,6 @@ div.modal-body{
 
 .hover:hover .overlay {
   opacity: 1;
-  cursor: pointer;
 }
 .overlay{
   position: absolute;
