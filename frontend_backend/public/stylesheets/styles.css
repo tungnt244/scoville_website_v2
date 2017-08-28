@@ -674,11 +674,9 @@ a.toggle-content:hover, a.toggle-content:visited, a.toggle-content:link, a.toggl
   margin-left: 0px;
   padding-left: 0px;
 }
-
-
-
 .social-image{
   height: 40px;
+  margin-bottom: 5%;
 }
 .social {
     text-align: right;
