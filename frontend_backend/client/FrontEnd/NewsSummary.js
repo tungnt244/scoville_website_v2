@@ -30,10 +30,12 @@ export default class NewsSummary extends Component {
                         {`${this.state.new.title}`}
                     </a>
                 </div>
-            )
-        else{
-            return(
-                <div>Wait a minute</div>
+                )
+                else{
+                return(
+                <div>
+                    Wait a minute
+                </div>
             )
         }
     }

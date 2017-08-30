@@ -31,20 +31,21 @@ export default class NewsSection extends React.Component{
         let url ='/news'
         return(
             <div>
-                <hr id="NEWS"/>
-                <div className="container bottom-padding" id="news-container">
-                    <div className="text-center">
-                        <section>
-                            <h2 className="section-heading" ><big>NEWS</big></h2>
-                            <br/><br/>
-                        </section>
-                    </div>
-                    {this.state && this.renderAllSummary()}
-                    <div className="text-center">
-                        <a href={url}><button className="btn button-news"><span className="btn-word">see more</span></button></a>
-                    </div>
-                        <br/><br/><br/><br/><hr id="ACCESS"/>
-                </div>
+               <hr id="NEWS"/>
+               <div className="container bottom-padding" id="news-container">
+                  <div className="text-center">
+                     <section>
+                        <h2 className="section-heading" ><big>NEWS</big></h2>
+                        <br/><br/>
+                     </section>
+                  </div>
+                  {this.state && this.renderAllSummary()}
+                  <div className="text-center">
+                     <a href={url}><button className="btn button-news"><span className="btn-word">see more</span></button></a>
+                  </div>
+                  <br/><br/><br/><br/>
+                  <hr id="ACCESS"/>
+               </div>
             </div>
         )
     }
