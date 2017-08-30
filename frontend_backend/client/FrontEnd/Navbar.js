@@ -14,6 +14,7 @@ export default class Navbar extends React.Component{
       this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(event) {
+      alert('送信が完了しました。');
       axios.post(api_url + '/forms/contact', {
           company_name: this.state.company,
           staff_name: this.state.staff,
@@ -125,8 +126,7 @@ export default class Navbar extends React.Component{
                                     </textarea>
                                 </div>
                                 <div className="modal-footer">
-                                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <button type="submit" className="btn btn-primary">Send message</button>
+                                  <button type="submit" className="button-form btn btn-primary">送信</button>
                                 </div>
                               </form>
                             </div>

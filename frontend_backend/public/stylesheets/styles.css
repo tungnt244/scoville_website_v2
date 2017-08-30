@@ -367,7 +367,19 @@ div.modal-body{
   text-align: left;
   color: #f22c20;
 }
-
+.modal-footer{
+  text-align: center;
+}
+.button-form{
+  color: #ac241f;
+  width:40%;
+  background-color: white;
+  margin-top: auto;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #ac241f;
+  margin-top: 3%;
+}
 #apply-button{
   color: #ac241f;
   width:30%;
@@ -483,7 +495,6 @@ div.modal-body{
 
 .hover:hover .overlay {
   opacity: 1;
-  cursor: pointer;
 }
 .overlay{
   position: absolute;
@@ -663,11 +674,9 @@ a.toggle-content:hover, a.toggle-content:visited, a.toggle-content:link, a.toggl
   margin-left: 0px;
   padding-left: 0px;
 }
-
-
-
 .social-image{
   height: 40px;
+  margin-bottom: 5%;
 }
 .social {
     text-align: right;

@@ -14,6 +14,7 @@ export default class RecruitmentSection extends React.Component{
   handleSubmit=(event) =>{
     event.stopPropagation()
     event.preventDefault()
+    alert('送信が完了しました。');
     console.log('in handle submit')
     axios.post(api_url + '/forms/recruitment', {
         email: this.state.email,
@@ -22,7 +23,6 @@ export default class RecruitmentSection extends React.Component{
       })
       .then(function (response) {
         console.log('response', response);
-        alert('your form has been successfully submitted');
       })
       .catch(function (error) {
         console.log('error: ', error.response);
@@ -116,7 +116,7 @@ export default class RecruitmentSection extends React.Component{
             <div className="modal-content">
               <div className="modal-header">
                 <h2 className="modal-title text-center" id="exampleModalLabel">
-                  Recruitment
+                  Recruit
                 </h2>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -134,8 +134,7 @@ export default class RecruitmentSection extends React.Component{
                     <textarea cols="20" rows="10" placeholder="自己PR" value={this.state.pr} onChange={this.handleChangePr.bind(this)} className="padding-popup form-control" id="self-pr"></textarea>
                   </div>
                   <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" className="btn btn-primary">送信</button>
+                    <button type="submit" className="button-form btn btn-primary">送信</button>
                   </div>
                 </form>
               </div>
@@ -148,7 +147,7 @@ export default class RecruitmentSection extends React.Component{
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h2 className="modal-title text-center" id="exampleModalLabel">Recruitment</h2>
+                <h2 className="modal-title text-center" id="exampleModalLabel">Recruit</h2>
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -161,9 +160,8 @@ export default class RecruitmentSection extends React.Component{
                   <div className="padding-popup form-group">
                     <textarea cols="20" rows="10" placeholder="自己PR" value={this.state.pr} onChange={this.handleChangePr.bind(this)} className="padding-popup form-control" id="self-PR"></textarea>
                   </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>送信</button>
+                  <div className="modal-footer text-center">
+                    <button type="button" className="button-form btn btn-primary" onClick={this.handleSubmit}>送信</button>
                   </div>
                 </form>
               </div>
