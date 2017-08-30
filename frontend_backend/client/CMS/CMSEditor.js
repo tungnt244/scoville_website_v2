@@ -150,9 +150,9 @@ export default class CMSEditor extends Component {
             </Col>
           </FormGroup>
         </Form>
-        {this.state.content &&
+        {this.state.isEdit &&
           this.getTinyMCE(this.state.content)
-        }{!this.state.content && 
+        }{!this.state.isEdit && 
           this.getTinyMCE()
         } 
       </div>

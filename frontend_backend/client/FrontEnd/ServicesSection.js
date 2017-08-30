@@ -6,11 +6,13 @@ export default class ServicesSection extends React.Component{
             <div>
                 <div className="container-fluid text-center" id="SERVICES-container">
                     <section>
-                        <h2 className="section-heading"><big>SERVICES</big></h2><br/>
+                        <h2 className="section-heading"><big>SERVICES</big></h2>
+                        <br/>
                     </section>
                     <p className="real">
                         “real”と”tech driven”の融合
-                    </p><br/>
+                    </p>
+                    <br/>
                     <div id="services-text-container" className="container japanese-text big-line-space">
                         リアルだけでもない。Webだけでも完結しない。<br/>
                         “人のリアルと融合したproduct”をキーワードに、<br/>
@@ -89,7 +91,8 @@ export default class ServicesSection extends React.Component{
                         </div>
                         <div className="col-lg-2 col-md-2 col-sm-2">
                         </div>
-                    </div><br/><br/>
+                    </div>
+                    <br/><br/>
                     <p id="small-text" className="japanese-text text-right">
                         ※年内ローンチ予定事業含む 
                     </p>
