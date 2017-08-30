@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import axios from 'axios'
 import {api_url} from '../../config'
-import {Grid, Row, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
+import {Grid, Row, Button} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 
 export default class CMSManager extends Component {

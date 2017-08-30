@@ -8,6 +8,15 @@ var app = require('../app');
 var debug = require('debug')('tungnt-react-server:server');
 var http = require('http');
 
+
+/**
+ * check enviroment node_env
+ */
+
+if(process.env.NODE_ENV !== 'production') {
+  console.log('looks like we are in development mode!')
+}
+
 /**
  * Get port from environment and store in Express.
  */

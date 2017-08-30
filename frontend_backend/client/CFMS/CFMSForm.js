@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {api_url} from '../../config'
 import axios from 'axios'
-import {Grid, Row, DropdownButton, MenuItem, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
+import {DropdownButton, MenuItem, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 
 const CONTACT_STATUS = {

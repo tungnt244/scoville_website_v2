@@ -3,7 +3,7 @@ import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import axios from 'axios'
 import {api_url} from '../../config'
 import {Redirect} from 'react-router-dom'
-import {Grid, Row, Button, Form, FormGroup, FormControl, Col, ControlLabel} from 'react-bootstrap'
+import {Grid, Row, Button} from 'react-bootstrap'
 
 export default class FMSManager extends Component {
 
